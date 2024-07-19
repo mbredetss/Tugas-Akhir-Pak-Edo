@@ -329,6 +329,8 @@ if (isset($_POST['btnsubmit'])) {
     $nama = $_POST['nama'];
     $email = $_POST['email'];
     $komentar = $_POST['comment'];
+    $currentDateTime = date("Y-m-d H:i:s");
+
     if ($nama == NULL || $email == NULL || $komentar == NULL) {
         ?>
         <script>
@@ -338,7 +340,7 @@ if (isset($_POST['btnsubmit'])) {
         </script>
         <?Php
     } else {
-        $queryUpload = "INSERT INTO contact VALUES('', '$nama', '$email', '$komentar')";
+        $queryUpload = "INSERT INTO contact VALUES('', '$nama', '$email', '$komentar', '$currentDateTime')";
         $sqlUpload = mysqli_query($conn, $queryUpload);
         if (!$sqlUpload) {
             die("Query gagal (upload): ". mysqli_error($conn));
