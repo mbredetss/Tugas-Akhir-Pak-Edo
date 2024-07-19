@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 19 Jul 2024 pada 10.55
+-- Waktu pembuatan: 19 Jul 2024 pada 14.02
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.0.30
 
@@ -31,15 +31,20 @@ CREATE TABLE `contact` (
   `no` int(11) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `komentar` varchar(10000) NOT NULL
+  `komentar` varchar(10000) NOT NULL,
+  `waktu` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `contact`
 --
 
-INSERT INTO `contact` (`no`, `nama`, `email`, `komentar`) VALUES
-(1, 'mighdad', 'gagah@gmail.com', 'kamu ganteng');
+INSERT INTO `contact` (`no`, `nama`, `email`, `komentar`, `waktu`) VALUES
+(1, 'mighdad', 'gagah@gmail.com', 'kamu ganteng', NULL),
+(2, 'asdasdawd', 'asdawsdwadwa@gmail.com', 'asdawdawsdwa', NULL),
+(3, 'ino ganteng', 'inogans@gmail.com', 'we kenapa gagah sekali ka we', NULL),
+(4, 'jerry', 'jerry420@gmail.com', 'deh masa we', '2024-07-19 11:30:06'),
+(5, 'deagustino', 'agusdea@gmail.com', 'we gagah mu', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -59,7 +64,7 @@ ALTER TABLE `contact`
 -- AUTO_INCREMENT untuk tabel `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
