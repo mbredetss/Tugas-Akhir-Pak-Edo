@@ -492,6 +492,51 @@ ol {
     color: #ffffff;
 }
 
+#listOption {
+    background-color: #333333 !important;
+    border-color: #333333 !important;
+    border: none;
+}
+
+#listOption .p-2 + .p-2 {
+    border-top: 1px solid #f36100;
+}
+
+#listOption a {
+    color: #f36100;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    -webkit-transition: background 0.3s;
+    -o-transition: background 0.3s;
+    transition: background 0.3s;
+}
+
+#listOption a:hover {
+    background: #f36100;
+    color: #ffffff;
+}
+
+#listOption button {
+    color: #f36100;
+    font-size: 16px;
+    font-weight: 700;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 10px 20px;
+    border-radius: 5px;
+    -webkit-transition: background 0.3s;
+    -o-transition: background 0.3s;
+    transition: background 0.3s;
+}
+
+#listOption button:hover {
+    background: #f36100;
+    color: #ffffff;
+}
+
 .offcanvas-menu-wrapper {
 	display: none;
 }
