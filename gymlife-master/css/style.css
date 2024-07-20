@@ -1161,6 +1161,10 @@ ol {
 	margin-bottom: 30px;
 }
 
+.fs-about img {
+	width: 160px;
+}
+
 .fs-about .fa-logo {
 	margin-bottom: 30px;
 }
