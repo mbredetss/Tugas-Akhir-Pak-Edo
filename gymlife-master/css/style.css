@@ -805,11 +805,6 @@ ol {
 	background: #f36100;
 }
 
-.ps-item:hover .thumb-icon {
-	opacity: 1;
-	visibility: visible;
-}
-
 .ps-item h3 {
 	font-size: 28px;
 	color: #ffffff;
@@ -828,7 +823,7 @@ ol {
 }
 
 .ps-item .pi-price h2 {
-	font-size: 60px;
+	font-size: 54px;
 	color: #f36100;
 	font-weight: 600;
 }
@@ -862,19 +857,30 @@ ol {
 	transform: skewY(4deg);
 }
 
-.ps-item .thumb-icon {
-	font-size: 48px;
-	color: #f36100;
-	position: absolute;
-	left: 50px;
-	bottom: 120px;
-	-webkit-transform: skewY(4deg);
-	-ms-transform: skewY(4deg);
-	transform: skewY(4deg);
-	opacity: 0;
-	visibility: hidden;
+.pricing-section .row.justify-content-center {
+    display: flex;
+    flex-wrap: wrap;
 }
 
+.pricing-section .col-lg-4,
+.pricing-section .col-md-8 {
+    display: flex;
+}
+
+.pricing-section .ps-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.pricing-section .ps-item ul {
+    flex-grow: 1;
+}
+
+.pricing-section .ps-item .primary-btn {
+    margin-top: auto;
+}
 /*---------------------
   Gallery Section
 -----------------------*/
@@ -911,7 +917,7 @@ ol {
 
 .gallery .gs-item .thumb-icon {
 	font-size: 48px;
-	color: #f36100;
+	color: transparent;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
