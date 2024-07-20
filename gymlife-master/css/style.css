@@ -443,41 +443,53 @@ ol {
 }
 
 .top-option {
-	text-align: right;
-	padding: 9px 0;
+    text-align: right;
+    padding: 9px 0;
 }
 
-.top-option .to-search {
-	display: inline-block;
-	padding-right: 20px;
-	position: relative;
+.top-option .sign-in-btn {
+    color: #ffffff;
+    font-size: 16px;
+    background: #f36100;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-right: 15px;
+    -webkit-transition: background 0.3s;
+    -o-transition: background 0.3s;
+    transition: background 0.3s;
 }
 
-.top-option .to-search:after {
-	position: absolute;
-	right: 0;
-	top: 5px;
-	height: 15px;
-	width: 1px;
-	background: rgba(255, 255, 255, 0.3);
-	content: "";
+.top-option .sign-in-btn:hover {
+    background: #333333;
 }
 
-.top-option .to-search i {
-	font-size: 16px;
-	color: #ffffff;
-	cursor: pointer;
+.top-option .user-profile {
+    color: #ffffff;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #f36100;
+    text-align: center;
+    line-height: 40px;
+    margin-left: 10px;
+    -webkit-transition: background 0.3s;
+    -o-transition: background 0.3s;
+    transition: background 0.3s;
 }
 
-.top-option .to-social {
-	display: inline-block;
+.top-option .user-profile:hover {
+    background: #333333;
 }
 
-.top-option .to-social a {
-	display: inline-block;
-	color: #ffffff;
-	font-size: 16px;
-	margin-left: 15px;
+.top-option .user-profile i {
+    font-size: 20px;
+    color: #ffffff;
 }
 
 .offcanvas-menu-wrapper {
