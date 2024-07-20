@@ -53,7 +53,7 @@ include "koneksi.php";
 
           <tbody>
             <?php
-            $sqlSelect = "SELECT * FROM contact";
+            $sqlSelect = "SELECT * FROM contact ORDER BY waktu DESC";
             $resultSelect = $conn->query($sqlSelect);
             if (!$resultSelect) {
               die("Error Select: " . mysqli_error($conn));
