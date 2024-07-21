@@ -89,7 +89,9 @@
       $sqlLogin = "SELECT * FROM user WHERE username='$username' AND password='$password'";
       $result = mysqli_query($conn, $sqlLogin);
       if (mysqli_num_rows($result) > 0) {
+        // Login berhasil, simpan username dan password di session
         $_SESSION['username'] = $username;
+        $_SESSION['password'] = $password;
         header("Location: index.php");
       } else {
         ?>

@@ -1,5 +1,21 @@
 <?php
-include "proses.php";
+include "koneksi.php";
+session_start();
+// Periksa apakah session username dan password ada
+if (isset($_SESSION['username'])) {
+    $usernames = $_SESSION['username'];
+    $passwords = $_SESSION['password'];
+    ?>
+    <script>
+        window.onload = function () {
+            document.getElementById('userProfile').removeAttribute('hidden');
+            document.getElementById('textBase').removeAttribute('hidden');
+            document.getElementById('listOption').removeAttribute('hidden');
+            document.getElementById('signIn').setAttribute('hidden', true);
+        };
+    </script>
+    <?php
+}
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -90,22 +106,15 @@ include "proses.php";
                 <div class="col-lg-3">
                     <div class="top-option">
                         <div class="relative">
-<<<<<<< HEAD
-                            <a href="login.php" class="sign-in-btn">Sign In</a>
-                            
+                            <a id="signIn" href="login.php" class="sign-in-btn">Sign In</a>
+
                             <!-- Profile -->
-                            <a hidden id="btnProfile" class="user-profile fa fa-user"></a>
-                            <span hidden class="text-base font-medium text-orange-500">
+                            <a id="userProfile" hidden id="btnProfile" class="user-profile fa fa-user"></a>
+                            <span id="textBase" hidden class="text-base font-medium text-orange-500">
                                 Devid Milinear
                             </span>
-                            <div id="listOption" hidden
+                            <div hidden id="listOption"
                                 class="absolute end-0 z-10 mt-2 w-56 divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg"
-=======
-                            <a href="registrasi.php" class="sign-in-btn">Sign In</a>
-                            <a id="btnProfile" class="user-profile fa fa-user">
-                            </a>
-                            <div id="listOption" hidden class="absolute end-0 z-10 mt-2 w-56 divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg"
->>>>>>> 946877c577f76a938d9a58c09b0271ea63c5eadc
                                 role="menu">
                                 <div class="p-2">
                                     <a href="#"
@@ -116,7 +125,7 @@ include "proses.php";
                                 </div>
 
                                 <div class="p-2">
-                                    <form method="POST" action="#">
+                                    <form method="POST" action="logout.php">
                                         <button type="submit"
                                             class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
                                             role="menuitem">
@@ -127,7 +136,7 @@ include "proses.php";
                             </div>
                             <!-- Profile -->
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
