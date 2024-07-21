@@ -46,6 +46,7 @@
                 <li><a href="./classes.html">Classes</a></li>
                 <li><a href="./services.html">Services</a></li>
                 <li><a href="./team.html">Our Team</a></li>
+                <li><a href="./blog.html">Article</a></li>
                 <li><a href="./contact.html">Contact</a></li>
             </ul>
         </nav>
@@ -78,6 +79,7 @@
                             <li><a href="./class-details.html">Classes</a></li>
                             <li><a href="./services.html">Services</a></li>
                             <li><a href="./team.html">Our Team</a></li>
+                            <li><a href="./blog.html">Article</a></li>
                             <li><a href="./contact.html">Contact</a></li>
                         </ul>
                     </nav>
