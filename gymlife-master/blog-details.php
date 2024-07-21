@@ -160,19 +160,17 @@ include "koneksi.php";
                             <p>Food intake before exercise is very important to provide the energy the body needs during exercise. 
                                 Ideally, consume foods rich in complex carbohydrates and a little protein 1-2 hours before exercise. 
                                 For example, you can choose brown rice with grilled chicken or whole wheat toast with eggs.</p>
-                            <h5>You Can Buy For Less Than A College Degree</h5>
-                            <p>Dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-                                in voluptate velit esse cillum dolore eu fugiat nulla pariatur officia deserunt mollit.
+                            <p>Selama berolahraga, terutama untuk sesi latihan intensitas tinggi atau durasi panjang, penting untuk menjaga asupan cairan dan energi. 
+                                Minumlah air secara teratur untuk menghindari dehidrasi. Anda juga dapat mengonsumsi minuman olahraga yang mengandung elektrolit 
+                                dan karbohidrat sederhana untuk membantu mempertahankan energi.
                             </p>
                         </div>
                         <div class="blog-details-pic">
                             <div class="blog-details-pic-item">
-                                <img src="./img/blog/details/details-1.jpg" alt="">
+                                <img src="./img/blog/details/det-1.jpg" alt="">
                             </div>
                             <div class="blog-details-pic-item">
-                                <img src="img/blog/details/details-2.jpg" alt="">
+                                <img src="img/blog/details/det-2.jpg" alt="">
                             </div>
                         </div>
                         <div class="blog-details-desc">
