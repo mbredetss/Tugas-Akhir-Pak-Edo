@@ -86,14 +86,30 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="top-option">
-                        <div class="to-search search-switch">
-                            <i class="fa fa-search"></i>
-                        </div>
-                        <div class="to-social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        <div class="relative">
+                            <a href="registrasi.php" class="sign-in-btn">Sign In</a>
+                            <a id="btnProfile" class="user-profile fa fa-user">
+                            </a>
+                            <div id="listOption" hidden class="absolute end-0 z-10 mt-2 w-56 divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg"
+                                role="menu">
+                                <div class="p-2">
+                                    <a href="#"
+                                        class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm  hover:bg-orange-500"
+                                        role="menuitem">
+                                          Edit profile
+                                    </a>
+                                </div>
+
+                                <div class="p-2">
+                                    <form method="POST" action="#">
+                                        <button type="submit"
+                                            class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
+                                            role="menuitem">
+                                            Logout
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -137,26 +153,25 @@
             <div class="row">
                 <div class="col-lg-3 order-lg-1 col-md-6 p-0">
                     <div class="ss-pic">
-                        <img src="img/services/services-1.jpg" alt="">
+                        <img src="img/services/yoga.jpg" alt="">
                     </div>
                 </div>
                 <div class="col-lg-3 order-lg-2 col-md-6 p-0">
                     <div class="ss-text">
-                        <h4>Personal training</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut dolore
-                            facilisis.</p>
-                        <a href="#">Explore</a>
+                        <h4>Yoga</h4>
+                        <p>Yoga is a holistic practice that combines physical postures, breath control, meditation, and ethical principles to promote overall well-being. </p>
+                        <a href="class-details.html">Explore</a>
                     </div>
                 </div>
                 <div class="col-lg-3 order-lg-3 col-md-6 p-0">
                     <div class="ss-pic">
-                        <img src="img/services/services-2.jpg" alt="">
+                        <img src="img/services/cardio.jpg" alt="">
                     </div>
                 </div>
                 <div class="col-lg-3 order-lg-4 col-md-6 p-0">
                     <div class="ss-text">
-                        <h4>Group fitness classes</h4>
-                        <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus.</p>
+                        <h4>Cardio</h4>
+                        <p>Cardio exercise is a type of physical exercise that increases heart rate and breathing.</p>
                         <a href="#">Explore</a>
                     </div>
                 </div>
@@ -167,9 +182,8 @@
                 </div>
                 <div class="col-lg-3 order-lg-7 col-md-6 p-0">
                     <div class="ss-text second-row">
-                        <h4>Body building</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut dolore
-                            facilisis.</p>
+                        <h4>Body Building</h4>
+                        <p>Bodybuilding is a physical activity that focuses on muscle development and body definition.</p>
                         <a href="#">Explore</a>
                     </div>
                 </div>
@@ -180,8 +194,8 @@
                 </div>
                 <div class="col-lg-3 order-lg-5 col-md-6 p-0">
                     <div class="ss-text second-row">
-                        <h4>Strength training</h4>
-                        <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus.</p>
+                        <h4>Weight Loss</h4>
+                        <p>Weight loss is the process of reducing the amount of body fat.</p>
                         <a href="#">Explore</a>
                     </div>
                 </div>
@@ -198,7 +212,7 @@
                     <div class="bs-text service-banner">
                         <h2>Exercise until the body obeys.</h2>
                         <div class="bt-tips">Where health, beauty and fitness meet.</div>
-                        <a href="https://www.youtube.com/watch?v=EzKkl64rRbM" class="play-btn video-popup"><i
+                        <a href="./img/WhatsApp Video 2024-07-21 at 21.31.01.mp4" class="play-btn video-popup"><i
                                 class="fa fa-caret-right"></i></a>
                     </div>
                 </div>
@@ -406,6 +420,9 @@
     <script src="js/jquery.slicknav.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/script.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
 
 
 
