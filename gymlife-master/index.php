@@ -8,7 +8,7 @@ if (isset($_SESSION['username'])) {
     ?>
     <script>
         window.onload = function () {
-            document.getElementById('userProfile').removeAttribute('hidden');
+            document.getElementById('btnProfile').removeAttribute('hidden');
             document.getElementById('textBase').removeAttribute('hidden');
             document.getElementById('listOption').removeAttribute('hidden');
             document.getElementById('signIn').setAttribute('hidden', true);
@@ -116,7 +116,7 @@ if (isset($_SESSION['username'])) {
                             <a id="signIn" href="login.php" class="sign-in-btn">Sign In</a>
 
                             <!-- Profile -->
-                            <a id="userProfile" hidden id="btnProfile" class="user-profile fa fa-user"></a>
+                            <a hidden id="btnProfile" class="user-profile fa fa-user"></a>
                             <span id="textBase" hidden class="text-base font-medium text-orange-500">
                                 <?php echo $nama; ?>
                             </span>
