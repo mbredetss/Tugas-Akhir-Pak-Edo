@@ -79,21 +79,37 @@
                             <li><a href="./class-details.html">Classes</a></li>
                             <li><a href="./services.html">Services</a></li>
                             <li><a href="./team.html">Our Team</a></li>
-                            <li><a href="./blog.html">Article</a></li>
+                            <li class="active"><a href="./blog.html">Article</a></li>
                             <li><a href="./contact.html">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3">
                     <div class="top-option">
-                        <div class="to-search search-switch">
-                            <i class="fa fa-search"></i>
-                        </div>
-                        <div class="to-social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        <div class="relative">
+                            <a href="registrasi.php" class="sign-in-btn">Sign In</a>
+                            <a id="btnProfile" class="user-profile fa fa-user">
+                            </a>
+                            <div id="listOption" hidden class="absolute end-0 z-10 mt-2 w-56 divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg"
+                                role="menu">
+                                <div class="p-2">
+                                    <a href="#"
+                                        class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm  hover:bg-orange-500"
+                                        role="menuitem">
+                                          Edit profile
+                                    </a>
+                                </div>
+
+                                <div class="p-2">
+                                    <form method="POST" action="#">
+                                        <button type="submit"
+                                            class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
+                                            role="menuitem">
+                                            Logout
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -111,11 +127,10 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb-text">
-                        <h2>Our Blog</h2>
+                        <h2>Our Article</h2>
                         <div class="bt-option">
                             <a href="./index.html">Home</a>
-                            <a href="#">Pages</a>
-                            <span>Blog</span>
+                            <span>Article</span>
                         </div>
                     </div>
                 </div>
@@ -134,15 +149,13 @@
                             <img src="img/blog/blog-1.jpg" alt="">
                         </div>
                         <div class="bi-text">
-                            <h5><a href="./blog-details.html">Vegan White Peach Mug Cobbler With Cardam Vegan White Peach Mug
-                                    Cobbler...</a></h5>
+                            <h5><a href="./blog-details.html">Workout Nutrition Explained. What to Eat Before, During, and After Exercise.</a></h5>
                             <ul>
                                 <li>by Admin</li>
                                 <li>Aug,15, 2019</li>
                                 <li>20 Comment</li>
                             </ul>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua accumsan lacus facilisis.</p>
+                            <p>Nutrition plays an important role in your exercise performance, muscle recovery, and achieving fitness goals...</p>
                         </div>
                     </div>
                     <div class="blog-item">
@@ -208,12 +221,6 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut
                                 labore et dolore magna aliqua accumsan lacus facilisis.</p>
                         </div>
-                    </div>
-                    <div class="blog-pagination">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">Next</a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-8 p-0">
@@ -302,22 +309,23 @@
                 <div class="col-md-4">
                     <div class="gt-text">
                         <i class="fa fa-map-marker"></i>
-                        <p>333 Middle Winchendon Rd, Rindge,<br/> NH 03461</p>
+                        <p>Jl. Abdullah Daeng Sirua No.84, Masale, Kec. Panakkukang, Kota Makassar, Sulawesi
+                            Selatan,<br/> 90231</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="gt-text">
                         <i class="fa fa-mobile"></i>
                         <ul>
-                            <li>125-711-811</li>
-                            <li>125-668-886</li>
+                            <li>(0411) 123-4567</li>
+                            <li>+62 812-3456-7890</li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="gt-text email">
                         <i class="fa fa-envelope"></i>
-                        <p>Support.gymcenter@gmail.com</p>
+                        <p>celebesgym@gmail.com</p>
                     </div>
                 </div>
             </div>
@@ -332,10 +340,12 @@
                 <div class="col-lg-4">
                     <div class="fs-about">
                         <div class="fa-logo">
-                            <a href="#"><img src="img/logo.png" alt=""></a>
+                            <a href="#"><img src="img/logoCelebes.png" alt=""></a>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore dolore magna aliqua endisse ultrices gravida lorem.</p>
+                        <p>Celebes Gym is a fitness center that provides modern facilities and professional services to
+                            help you achieve your health and fitness goals.
+                            With a variety of specially designed classes and programs, we are committed to providing the
+                            best fitness experience for all our members.</p>
                         <div class="fa-social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
