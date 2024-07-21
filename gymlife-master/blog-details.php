@@ -1,3 +1,6 @@
+<?php
+include "koneksi.php";
+?>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -282,12 +285,11 @@
                             <div class="col-lg-6">
                                 <div class="leave-comment">
                                     <h5>Leave a comment</h5>
-                                    <form action="#">
-                                        <input type="text" placeholder="Name">
-                                        <input type="text" placeholder="Email">
-                                        <input type="text" placeholder="Website">
-                                        <textarea placeholder="Comment"></textarea>
-                                        <button type="submit">Submit</button>
+                                    <form action="#" method="post">
+                                        <input name="nama" type="text" placeholder="Name">
+                                        <input name="email" type="text" placeholder="Email">
+                                        <textarea name="comment" placeholder="Comment"></textarea>
+                                        <button name="submit" type="submit">Submit</button>
                                     </form>
                                 </div>
                             </div>
@@ -419,3 +421,28 @@
 </body>
 
 </html>
+<?php
+if (isset($_POST['submit']))
+{
+$nama = $_POST['nama'];
+$email = $_POST['email'];
+$comment = $_POST['comment'];
+$sql = "INSERT INTO komen VALUES ('$nama', '$email', '$comment')";
+if ($conn->query($sql) === TRUE)
+{
+?>
+<div class="alert alert-success alertdismissable">
+<strong>Success!</strong> Data Tamu Restaurant Berhasil dinput
+</div>
+<?php
+}
+else
+{
+?>
+<div class="alert alert-danger alertdismissable">
+<strong>Failed!</strong> Data Tamu Restaurant Gagal diInput
+</div>
+<?php
+}
+}
+?>
