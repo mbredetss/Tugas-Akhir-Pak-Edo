@@ -1589,6 +1589,10 @@ ol {
 	margin-bottom: 35px;
 }
 
+.class-details-timetable_title a:hover h5 {
+	color: #f36100;
+  }
+
 .class-details-timetable_title h5 {
 	font-size: 20px;
 	color: #ffffff;

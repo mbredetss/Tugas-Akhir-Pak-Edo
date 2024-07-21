@@ -49,6 +49,7 @@ include "proses.php";
                 <li><a href="./classes.html">Classes</a></li>
                 <li><a href="./services.html">Services</a></li>
                 <li><a href="./team.html">Our Team</a></li>
+                <li><a href="./blog.html">Article</a></li>
                 <li><a href="./contact.html">Contact</a></li>
             </ul>
         </nav>
@@ -81,6 +82,7 @@ include "proses.php";
                             <li><a href="./class-details.html">Classes</a></li>
                             <li><a href="./services.html">Services</a></li>
                             <li><a href="./team.html">Our Team</a></li>
+                            <li><a href="./blog.html">Article</a></li>
                             <li><a href="./contact.html">Contact</a></li>
                         </ul>
                     </nav>
@@ -88,6 +90,7 @@ include "proses.php";
                 <div class="col-lg-3">
                     <div class="top-option">
                         <div class="relative">
+<<<<<<< HEAD
                             <a href="login.php" class="sign-in-btn">Sign In</a>
                             
                             <!-- Profile -->
@@ -97,6 +100,12 @@ include "proses.php";
                             </span>
                             <div id="listOption" hidden
                                 class="absolute end-0 z-10 mt-2 w-56 divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg"
+=======
+                            <a href="registrasi.php" class="sign-in-btn">Sign In</a>
+                            <a id="btnProfile" class="user-profile fa fa-user">
+                            </a>
+                            <div id="listOption" hidden class="absolute end-0 z-10 mt-2 w-56 divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg"
+>>>>>>> 946877c577f76a938d9a58c09b0271ea63c5eadc
                                 role="menu">
                                 <div class="p-2">
                                     <a href="#"
@@ -319,7 +328,7 @@ include "proses.php";
                     <div class="ps-item">
                         <h3>3 Month unlimited</h3>
                         <div class="pi-price">
-                            <h2>Rp. 150.000</h2>
+                            <h2>Rp. 350.000</h2>
                             <span>SINGLE CLASS</span>
                         </div>
                         <ul>
@@ -337,7 +346,7 @@ include "proses.php";
                     <div class="ps-item">
                         <h3>6 Month unlimited</h3>
                         <div class="pi-price">
-                            <h2>Rp. 450.000</h2>
+                            <h2>Rp. 600.000</h2>
                             <span>DOUBLE CLASS</span>
                         </div>
                         <ul>
@@ -355,7 +364,7 @@ include "proses.php";
                     <div class="ps-item">
                         <h3>1 Year unlimited</h3>
                         <div class="pi-price">
-                            <h2>Rp. 600.000</h2>
+                            <h2>Rp. 1.150.000</h2>
                             <span>SPECIAL CLASS</span>
                         </div>
                         <ul>
@@ -419,50 +428,50 @@ include "proses.php";
             <div class="row">
                 <div class="ts-slider owl-carousel">
                     <div class="col-lg-4">
-                        <div class="ts-item set-bg" data-setbg="img/team/team-1.jpg">
+                        <div class="ts-item set-bg" data-setbg="img/team/tes-1.jpg">
                             <div class="ts_text">
-                                <h4>Athart Rachel</h4>
+                                <h4>Bobby Ida</h4>
+                                <span>Youtuber & Gym Trainer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ts-item set-bg" data-setbg="img/team/tes-2.jpg">
+                            <div class="ts_text">
+                                <h4>Kevin Hendrawan</h4>
                                 <span>Gym Trainer</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="ts-item set-bg" data-setbg="img/team/team-2.jpg">
+                        <div class="ts-item set-bg" data-setbg="img/team/tes-3.jpg">
                             <div class="ts_text">
-                                <h4>Athart Rachel</h4>
-                                <span>Gym Trainer</span>
+                                <h4>Ade Rai</h4>
+                                <span>Bodybuilder & Gym Trainer</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="ts-item set-bg" data-setbg="img/team/team-3.jpg">
+                        <div class="ts-item set-bg" data-setbg="img/team/tes-4.jpg">
                             <div class="ts_text">
-                                <h4>Athart Rachel</h4>
-                                <span>Gym Trainer</span>
+                                <h4>Jennifer Bachdim</h4>
+                                <span>Yoga & Fitness Trainer</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="ts-item set-bg" data-setbg="img/team/team-4.jpg">
+                        <div class="ts-item set-bg" data-setbg="img/team/tes-5.jpg">
                             <div class="ts_text">
-                                <h4>Athart Rachel</h4>
-                                <span>Gym Trainer</span>
+                                <h4>Anjasmara</h4>
+                                <span>Yoga Trainer</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="ts-item set-bg" data-setbg="img/team/team-5.jpg">
+                        <div class="ts-item set-bg" data-setbg="img/team/tes-6.jpg">
                             <div class="ts_text">
-                                <h4>Athart Rachel</h4>
-                                <span>Gym Trainer</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="ts-item set-bg" data-setbg="img/team/team-6.jpg">
-                            <div class="ts_text">
-                                <h4>Athart Rachel</h4>
-                                <span>Gym Trainer</span>
+                                <h4>Melanie Putria</h4>
+                                <span>Fitness Trainer</span>
                             </div>
                         </div>
                     </div>
