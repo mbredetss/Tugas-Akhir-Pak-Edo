@@ -311,7 +311,7 @@
                     <div class="ps-item">
                         <h3>3 Month unlimited</h3>
                         <div class="pi-price">
-                            <h2>Rp. 150.000</h2>
+                            <h2>Rp. 350.000</h2>
                             <span>SINGLE CLASS</span>
                         </div>
                         <ul>
@@ -329,7 +329,7 @@
                     <div class="ps-item">
                         <h3>6 Month unlimited</h3>
                         <div class="pi-price">
-                            <h2>Rp. 450.000</h2>
+                            <h2>Rp. 600.000</h2>
                             <span>DOUBLE CLASS</span>
                         </div>
                         <ul>
@@ -347,7 +347,7 @@
                     <div class="ps-item">
                         <h3>1 Year unlimited</h3>
                         <div class="pi-price">
-                            <h2>Rp. 600.000</h2>
+                            <h2>Rp. 1.150.000</h2>
                             <span>SPECIAL CLASS</span>
                         </div>
                         <ul>
@@ -438,7 +438,7 @@
                         <div class="ts-item set-bg" data-setbg="img/team/tes-4.jpg">
                             <div class="ts_text">
                                 <h4>Jennifer Bachdim</h4>
-                                <span>Yoga and Fitness Trainer</span>
+                                <span>Yoga & Fitness Trainer</span>
                             </div>
                         </div>
                     </div>
