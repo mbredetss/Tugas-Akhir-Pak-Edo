@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 19 Jul 2024 pada 14.02
+-- Waktu pembuatan: 21 Jul 2024 pada 08.34
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.0.30
 
@@ -35,16 +35,52 @@ CREATE TABLE `contact` (
   `waktu` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data untuk tabel `contact`
+-- Struktur dari tabel `registrasi`
 --
 
-INSERT INTO `contact` (`no`, `nama`, `email`, `komentar`, `waktu`) VALUES
-(1, 'mighdad', 'gagah@gmail.com', 'kamu ganteng', NULL),
-(2, 'asdasdawd', 'asdawsdwadwa@gmail.com', 'asdawdawsdwa', NULL),
-(3, 'ino ganteng', 'inogans@gmail.com', 'we kenapa gagah sekali ka we', NULL),
-(4, 'jerry', 'jerry420@gmail.com', 'deh masa we', '2024-07-19 11:30:06'),
-(5, 'deagustino', 'agusdea@gmail.com', 'we gagah mu', '0000-00-00 00:00:00');
+CREATE TABLE `registrasi` (
+  `no` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `registrasi`
+--
+
+INSERT INTO `registrasi` (`no`, `username`, `password`) VALUES
+(19, '123', '123'),
+(20, '1234', '123'),
+(21, '123', '123'),
+(22, 'asdasd', '123');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `user`
+--
+
+CREATE TABLE `user` (
+  `no` int(11) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `alamat` varchar(100) NOT NULL,
+  `tanggal_lahir` date NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `user`
+--
+
+INSERT INTO `user` (`no`, `nama`, `alamat`, `tanggal_lahir`, `username`, `password`) VALUES
+(19, '123', 'dasdsa', '2024-07-21', '123', '123'),
+(20, 'fsdf', 'sdfsdf', '2024-07-21', '1234', '123'),
+(21, 'dasd', 'asdasd', '2024-07-21', '123', '123'),
+(22, 'asdasd', 'asdasdasd', '2024-07-21', 'asdasd', '123');
 
 --
 -- Indexes for dumped tables
@@ -57,6 +93,18 @@ ALTER TABLE `contact`
   ADD PRIMARY KEY (`no`);
 
 --
+-- Indeks untuk tabel `registrasi`
+--
+ALTER TABLE `registrasi`
+  ADD PRIMARY KEY (`no`);
+
+--
+-- Indeks untuk tabel `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`no`);
+
+--
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
@@ -64,7 +112,19 @@ ALTER TABLE `contact`
 -- AUTO_INCREMENT untuk tabel `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT untuk tabel `registrasi`
+--
+ALTER TABLE `registrasi`
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT untuk tabel `user`
+--
+ALTER TABLE `user`
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

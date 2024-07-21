@@ -1,6 +1,3 @@
-<?php 
-include "koneksi.php";
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,15 +37,6 @@ include "koneksi.php";
               </label>
 
               <input type="text" id="nama" name="nama"
-                class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
-            </div>
-
-            <div class="col-span-6 sm:col-span-3">
-              <label for="Stambuk" class="block text-sm font-medium text-gray-700">
-                Stambuk
-              </label>
-
-              <input type="text" id="stambuk" name="stambuk"
                 class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
             </div>
 
@@ -105,6 +93,12 @@ include "koneksi.php";
               </div>
             </div>
 
+            <div class="col-span-6">
+              <div id="alert3" hidden class="alert alert-danger" role="alert">
+                Username sudah terpakai, Silahkan gunakan username yang lain!
+              </div>
+            </div>
+
             <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
               <button name="btnkonfirmasi"
                 class="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500">
@@ -127,38 +121,53 @@ include "koneksi.php";
 </html>
 
 <?php
+include "koneksi.php";
 if (isset($_POST["btnkonfirmasi"])) {
   $nama = $_POST["nama"];
-  $stambuk = $_POST["stambuk"];
   $username = $_POST["username"];
   $password = $_POST["password"];
   $alamat = $_POST["alamat"];
   $tanggalLahir = $_POST["tanggalLahir"];
   $passwordConfirmation = $_POST["password_confirmation"];
 
-  if ($nama == NULL || $stambuk == NULL || $username == NULL || $password == NULL || $alamat == NULL || $tanggalLahir == NULL || $passwordConfirmation == NULL) {
+  if ($nama == NULL || $username == NULL || $password == NULL || $alamat == NULL || $tanggalLahir == NULL || $passwordConfirmation == NULL) {
     ?>
     <script>
       document.getElementById('alert2').removeAttribute('hidden');
     </script>
     <?php
   } else {
-    // Pengecekan password sama atau tidak
-    if ($password == $passwordConfirmation) {
-      $sqlRegistrasi = "INSERT INTO registrasi VALUES('', '$stambuk', '$username', '$password')";
-      $sqlMahasiswa = "INSERT INTO mahasiswa VALUES('','$stambuk', '$nama', '$alamat', '$tanggalLahir')";
-      // Upload no(Auto Increment), stambuk, username, password ke database registrasi
-      $queryRegistrasi = mysqli_query($conn, $sqlRegistrasi);
-      if (!$queryRegistrasi) {
-        die("Query gagal: " . mysqli_error($conn));
-      }
-      // Upload no(Auto Increment), stambuk, nama, alamat, tanggal_lahir ke database mahasiswa
-      $queryMahasiswa = mysqli_query($conn, $sqlMahasiswa);
-      if (!$queryMahasiswa) {
-        die("Query gagal: " . mysqli_error($conn));
+    // Pengecekan apakah username tersedia atau tidak
+    $sqlCekUsernameAvailable = "SELECT username FROM registrasi";
+    $CekUsernameAvailable = mysqli_query($conn, $sqlCekUsernameAvailable);
+    if (!$CekUsernameAvailable) {
+      die("Query Cek Username gagal: " . mysqli_error($conn));
+    }
+    while ($cek = $CekUsernameAvailable->fetch_assoc()) {
+      if ($cek['username'] == $username) {
+        ?>
+        <script>
+          document.getElementById('alert3').removeAttribute('hidden');
+        </script>
+        <?php
+        die();
       }
     }
-    // 
+    // Pengecekan password sama atau tidak
+    if ($password == $passwordConfirmation) {
+      $sqlRegistrasi = "INSERT INTO registrasi VALUES('', '$username', '$password')";
+      $sqlUser = "INSERT INTO user VALUES('', '$nama', '$alamat', '$tanggalLahir', '$username', '$password')";
+      // Upload no(Auto Increment), username, password ke database registrasi
+      $queryRegistrasi = mysqli_query($conn, $sqlRegistrasi);
+      if (!$queryRegistrasi) {
+        die("Query Registrasi gagal: " . mysqli_error($conn));
+      }
+      // Upload no(Auto Increment), nama, alamat, tanggal_lahir, username, password ke database user
+      $queryUser = mysqli_query($conn, $sqlUser);
+      if (!$queryUser) {
+        die("Query User gagal: " . mysqli_error($conn));
+      }
+    }
     else {
       ?>
       <script>
