@@ -15,6 +15,13 @@ if (isset($_SESSION['username'])) {
         };
     </script>
     <?php
+    $sqlnama = "SELECT user.nama FROM registrasi INNER JOIN user ON user.username = registrasi.username WHERE registrasi.username = '$usernames' AND registrasi.password = '$passwords'";
+    $queryNama = mysqli_query($conn, $sqlnama);
+    if (!$queryNama) {
+        die("Query nama gagal :" . mysqli_error($conn));
+    }
+    $namaRow = mysqli_fetch_assoc($queryNama);
+    $nama = $namaRow['nama'];
 }
 ?>
 <!DOCTYPE html>
@@ -111,7 +118,7 @@ if (isset($_SESSION['username'])) {
                             <!-- Profile -->
                             <a id="userProfile" hidden id="btnProfile" class="user-profile fa fa-user"></a>
                             <span id="textBase" hidden class="text-base font-medium text-orange-500">
-                                Devid Milinear
+                                <?php echo $nama; ?>
                             </span>
                             <div hidden id="listOption"
                                 class="absolute end-0 z-10 mt-2 w-56 divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg"
