@@ -1,5 +1,28 @@
 <?php
 include "koneksi.php";
+session_start();
+// Periksa apakah session username dan password ada
+if (isset($_SESSION['username'])) {
+    $usernames = $_SESSION['username'];
+    $passwords = $_SESSION['password'];
+    ?>
+    <script>
+        window.onload = function () {
+            document.getElementById('btnProfile').removeAttribute('hidden');
+            document.getElementById('textBase').removeAttribute('hidden');
+            document.getElementById('listOption').removeAttribute('hidden');
+            document.getElementById('signIn').setAttribute('hidden', true);
+        };
+    </script>
+    <?php
+    $sqlnama = "SELECT user.nama FROM registrasi INNER JOIN user ON user.username = registrasi.username WHERE registrasi.username = '$usernames' AND registrasi.password = '$passwords'";
+    $queryNama = mysqli_query($conn, $sqlnama);
+    if (!$queryNama) {
+        die("Query nama gagal :" . mysqli_error($conn));
+    }
+    $namaRow = mysqli_fetch_assoc($queryNama);
+    $nama = $namaRow['nama'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -77,47 +100,21 @@ include "koneksi.php";
                 <div class="col-lg-6">
                     <nav class="nav-menu">
                         <ul>
-                            <li><a href="./index.html">Home</a></li>
-                            <li><a href="./about-us.html">About Us</a></li>
-                            <li><a href="./class-details.html">Classes</a></li>
-                            <li><a href="./services.html">Services</a></li>
-                            <li><a href="./team.html">Our Team</a></li>
-                            <li class="active"><a href="./blog.html">Article</a>
+                            <li><a href="./index.php">Home</a></li>
+                            <li><a href="./about-us.php">About Us</a></li>
+                            <li><a href="./class-details.php">Classes</a></li>
+                            <li><a href="./services.php">Services</a></li>
+                            <li><a href="./team.php">Our Team</a></li>
+                            <li class="active"><a href="./blog.php">Article</a>
                                 <ul class="dropdown">
-                                    <li><a href="./blog.html">Back to Article</a></li>
+                                    <li><a href="./blog.php">Back to Article</a></li>
                                 </ul></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                            <li><a href="./contact.php">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3">
-                    <div class="top-option">
-                        <div class="relative">
-                            <a href="registrasi.php" class="sign-in-btn">Sign In</a>
-                            <a id="btnProfile" class="user-profile fa fa-user">
-                            </a>
-                            <div id="listOption" hidden class="absolute end-0 z-10 mt-2 w-56 divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg"
-                                role="menu">
-                                <div class="p-2">
-                                    <a href="#"
-                                        class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm  hover:bg-orange-500"
-                                        role="menuitem">
-                                          Edit profile
-                                    </a>
-                                </div>
-
-                                <div class="p-2">
-                                    <form method="POST" action="#">
-                                        <button type="submit"
-                                            class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
-                                            role="menuitem">
-                                            Logout
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
             <div class="canvas-open">
@@ -306,22 +303,23 @@ include "koneksi.php";
                 <div class="col-lg-4">
                     <div class="gt-text">
                         <i class="fa fa-map-marker"></i>
-                        <p>333 Middle Winchendon Rd, Rindge,<br/> NH 03461</p>
+                        <p>Jl. Abdullah Daeng Sirua No.84, Masale, Kec. Panakkukang, Kota Makassar, Sulawesi
+                        Selatan,<br/> 90231</p>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="gt-text">
                         <i class="fa fa-mobile"></i>
                         <ul>
-                            <li>125-711-811</li>
-                            <li>125-668-886</li>
+                            <li>(0411) 123-4567</li>
+                            <li>+62 812-3456-7890</li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="gt-text email">
                         <i class="fa fa-envelope"></i>
-                        <p>Support.gymcenter@gmail.com</p>
+                        <p>celebesgym@gmail.com</p>
                     </div>
                 </div>
             </div>
@@ -338,8 +336,10 @@ include "koneksi.php";
                         <div class="fa-logo">
                             <a href="#"><img src="img/logo.png" alt=""></a>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore dolore magna aliqua endisse ultrices gravida lorem.</p>
+                        <p>Celebes Gym is a fitness center that provides modern facilities and professional services to
+                            help you achieve your health and fitness goals.
+                            With a variety of specially designed classes and programs, we are committed to providing the
+                            best fitness experience for all our members..</p>
                         <div class="fa-social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
