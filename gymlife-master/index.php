@@ -23,6 +23,7 @@ if (isset($_SESSION['username'])) {
     $namaRow = mysqli_fetch_assoc($queryNama);
     $nama = $namaRow['nama'];
 
+    //saldo
     $sqlSaldo = "SELECT saldo FROM user WHERE username = '$usernames'";
     $querySaldo = mysqli_query($conn, $sqlSaldo);
     if (!$querySaldo) {
@@ -31,6 +32,22 @@ if (isset($_SESSION['username'])) {
 
     $saldoRow = mysqli_fetch_assoc($querySaldo);
     $saldo = $saldoRow['saldo'];
+
+    //masa membership
+    $sqlCekMembership = "SELECT * FROM langganan WHERE username = '$usernames'";
+    $queryCekMembership = mysqli_query($conn, $sqlCekMembership);
+    if (mysqli_num_rows($queryCekMembership) > 0) {
+        $date = date('Y-m-d');
+        $sqlMasaMembership = "SELECT DATEDIFF(langganan_berakhir, $date) AS masa_membership FROM langganan WHERE username = '$usernames'";
+        $queryMasaMembership = mysqli_query($conn, $sqlMasaMembership);
+        if (!$queryMasaMembership) {
+            die("Query masa membership gagal: ". mysqli_error($conn));
+        }
+        $masaMembershipRow = mysqli_fetch_assoc($queryMasaMembership);
+        $masaMembership = $masaMembershipRow['masa_membership'];
+    } else {
+        $masaMembership = 0;
+    }
 }
 
 //BUTTON LOGIN
@@ -83,23 +100,39 @@ if (!isset($_SESSION['username'])) {
 }
 
 if (isset($_POST['btn3Month'])) {
-    // Inisialisasi tanggal saat ini
-    $tanggalLangganan = new DateTime(); // Tanggal saat ini
-    // Tambahkan 30 hari ke tanggal saat ini
-    $tanggalLangganan->modify('+30 days');
-    // Format tanggal baru
-    $tanggalBerakhir = $tanggalLangganan->format('d/m/Y');
-    $date = date('d/m/Y');
+    $biaya = 350000;
+    if ($biaya >= $saldo) {
+        ?>
+        <script>
+            alert("SALDO ANDA TIDAK CUKUP!");
+        </script>
+        <?php
+    } else {
+        // Inisialisasi tanggal saat ini
+        $tanggalLangganan = new DateTime(); // Tanggal saat ini
+        // Tambahkan 30 hari ke tanggal saat ini
+        $tanggalLangganan->modify('+30 days');
+        // Format tanggal baru
+        $tanggalBerakhir = $tanggalLangganan->format('Y-m-d'); // Ubah format menjadi Y-m-d
+        $date = date('Y-m-d'); // Ubah format menjadi Y-m-d
 
-    //upload usernames, date, tanggal berakhir ke table langganan
-    $sqlLangganan = "INSERT INTO langganan VALUES($usernames, $date, $tanggalBerakhir)";
-    $queryLangganan = mysqli_query($conn, $sqlLangganan);
-    if (!$queryLangganan) {
-        die("Query langganan gagal: " . mysqli_error($conn));
+        //upload usernames, date, tanggal berakhir ke table langganan
+        $sqlLangganan = "INSERT INTO langganan (username, tanggal_langganan, langganan_berakhir) VALUES ('$usernames', '$tanggalBerakhir', '$date')";
+        $queryLangganan = mysqli_query($conn, $sqlLangganan);
+        if (!$queryLangganan) {
+            die("Query langganan gagal: " . mysqli_error($conn));
+        }
+
+        //UPDATE SALDO DI DATABASE
+        $sqlUpdateSaldo = "UPDATE user SET saldo = saldo - $biaya WHERE username = $usernames";
+        $queryUpdateSaldo = mysqli_query($conn, $sqlUpdateSaldo);
+        if (!$queryUpdateSaldo) {
+            die("Query Update saldo gagal: ". mysqli_error($conn));
+        }
+        //UPDATE SALDO DI TAMPILAN
+        $saldo -= $biaya;
     }
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -125,6 +158,17 @@ if (isset($_POST['btn3Month'])) {
     <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+
+    <script>
+        function confirmSubscription() {
+            var result = confirm("Apakah Anda yakin ingin melanjutkan langganan?");
+            if (result) {
+                document.getElementById('subscriptionForm').submit();
+            } else {
+                event.preventDefault();
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -278,6 +322,13 @@ if (isset($_POST['btn3Month'])) {
                                     <p class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm "
                                         role="menuitem">
                                         Saldo : <?php echo $saldo; ?>
+                                    </p>
+                                </div>
+
+                                <div class="p-2">
+                                    <p class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm "
+                                        role="menuitem">
+                                        Masa Membership : <?php echo $masaMembership; ?>
                                     </p>
                                 </div>
 
@@ -489,72 +540,71 @@ if (isset($_POST['btn3Month'])) {
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-8">
-                    <div class="ps-item">
-                        <h3>3 Month unlimited</h3>
-                        <div class="pi-price">
-                            <h2>Rp. 350.000</h2>
-                            <span>SINGLE CLASS</span>
-                        </div>
-                        <ul>
-                            <li>Free riding</li>
-                            <li>Limited equipments</li>
-                            <li>Group trainer</li>
-                            <li>Weight loss classes</li>
-                            <li>Monthly membership</li>
-                            <li>Time restrictions apply</li>
-                        </ul>
-                        <form method="post">
-                            <button type="submit" class="btnLangganan" name="btn3Month">
-                                <a href="" class="primary-btn pricing-btn">Enroll now</a>
+            <form id="myForm" method="post">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-8">
+                        <div class="ps-item">
+                            <h3>3 Month unlimited</h3>
+                            <div class="pi-price">
+                                <h2>Rp. 350.000</h2>
+                                <span>SINGLE CLASS</span>
+                            </div>
+                            <ul>
+                                <li>Free riding</li>
+                                <li>Limited equipments</li>
+                                <li>Group trainer</li>
+                                <li>Weight loss classes</li>
+                                <li>Monthly membership</li>
+                                <li>Time restrictions apply</li>
+                            </ul>
+                            <button onclick="confirmSubscription()" type="submit" class="btnLangganan" name="btn3Month">
+                                <a class="primary-btn pricing-btn">Enroll now</a>
                             </button>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-8">
-                    <div class="ps-item">
-                        <h3>6 Month unlimited</h3>
-                        <div class="pi-price">
-                            <h2>Rp. 600.000</h2>
-                            <span>DOUBLE CLASS</span>
                         </div>
-                        <ul>
-                            <li>Free riding</li>
-                            <li>Unlimited equipments</li>
-                            <li>Personal trainer</li>
-                            <li>Weight loss classes</li>
-                            <li>Monthly membership</li>
-                            <li>No time restrictions</li>
-                        </ul>
-                        <button class="btnLangganan" name="btn6Month">
-                            <a href="#" class="primary-btn pricing-btn">Enroll now</a>
-                        </button>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-8">
-                    <div class="ps-item">
-                        <h3>1 Year unlimited</h3>
-                        <div class="pi-price">
-                            <h2>Rp. 1.150.000</h2>
-                            <span>SPECIAL CLASS</span>
+                    <div class="col-lg-4 col-md-8">
+                        <div class="ps-item">
+                            <h3>6 Month unlimited</h3>
+                            <div class="pi-price">
+                                <h2>Rp. 600.000</h2>
+                                <span>DOUBLE CLASS</span>
+                            </div>
+                            <ul>
+                                <li>Free riding</li>
+                                <li>Unlimited equipments</li>
+                                <li>Personal trainer</li>
+                                <li>Weight loss classes</li>
+                                <li>Monthly membership</li>
+                                <li>No time restrictions</li>
+                            </ul>
+                            <button class="btnLangganan" name="btn6Month">
+                                <a class="primary-btn pricing-btn">Enroll now</a>
+                            </button>
                         </div>
-                        <ul>
-                            <li>Free riding</li>
-                            <li>Unlimited premium equipments</li>
-                            <li>Personal elite trainer</li>
-                            <li>Weight loss & muscle gain classes</li>
-                            <li>Yearly membership</li>
-                            <li>No time restrictions</li>
-                            <li>Access to exclusive events</li>
-                            <li>Free nutritional guidance</li>
-                        </ul>
-                        <button class="btnLangganan" name="btn1Year">
-                            <a href="" class="primary-btn pricing-btn">Enroll now</a>
-                        </button>
+                    </div>
+                    <div class="col-lg-4 col-md-8">
+                        <div class="ps-item">
+                            <h3>1 Year unlimited</h3>
+                            <div class="pi-price">
+                                <h2>Rp. 1.150.000</h2>
+                                <span>SPECIAL CLASS</span>
+                            </div>
+                            <ul>
+                                <li>Free riding</li>
+                                <li>Unlimited premium equipments</li>
+                                <li>Personal elite trainer</li>
+                                <li>Weight loss & muscle gain classes</li>
+                                <li>Yearly membership</li>
+                                <li>No time restrictions</li>
+                                <li>Access to exclusive events</li>
+                                <li>Free nutritional guidance</li>
+                            </ul>
+                            <button class="btnLangganan" name="btn1Year">
+                                <a class="primary-btn pricing-btn">Enroll now</a>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
     </section>
     <!-- Pricing Section End -->
