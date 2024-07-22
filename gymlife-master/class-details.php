@@ -306,7 +306,7 @@ if (isset($_SESSION['username'])) {
             <div class="row">
                 <div class="col-lg-12">
                     <div class="class-details-timetable_title">
-                        <a href="class-timetable.html"><h5>Classes timetable</h5></a>
+                        <a href="class-timetable.php"><h5>Classes timetable</h5></a>
                     </div>
                 </div>
             </div>

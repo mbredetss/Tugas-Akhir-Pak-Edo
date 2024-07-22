@@ -256,7 +256,8 @@ if (isset($_SESSION['username'])) {
                     <div class="gt-text">
                         <i class="fa fa-mobile"></i>
                         <ul>
-                            <li>0822-1677-3773</li>
+                            <li>(0411) 123-4567</li>
+                            <li>+62 812-3456-7890</li>
                         </ul>
                     </div>
                 </div>

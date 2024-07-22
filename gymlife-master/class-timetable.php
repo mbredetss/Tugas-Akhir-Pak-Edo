@@ -102,7 +102,10 @@ if (isset($_SESSION['username'])) {
                         <ul>
                             <li><a href="./index.php">Home</a></li>
                             <li><a href="./about-us.php">About Us</a></li>
-                            <li><a href="./classes.php">Classes</a></li>
+                            <li><a href="./class-details.php">Classes</a>
+                                <ul class="dropdown">
+                                    <li><a href="./class-details.php">Back to Article</a></li>
+                                </ul></li>
                             <li><a href="./services.php">Services</a></li>
                             <li><a href="./team.php">Our Team</a></li>
                             <li><a href="./blog.php">Article</a></li>
