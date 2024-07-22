@@ -402,7 +402,7 @@ if (isset($_POST['btnsubmit'])) {
      $dateTimeWITA = new DateTime('now', new DateTimeZone('Asia/Makassar'));
      $currentDateTimeWITA = $dateTimeWITA->format('Y-m-d H:i:s');
 
-    if ($nama == NULL || $email == NULL || $komentar == NULL) {
+    if ($nama == NULL || $email == NULL || $pertanyaan == NULL) {
         ?>
         <script>
             window.onload = function () {
@@ -411,7 +411,7 @@ if (isset($_POST['btnsubmit'])) {
         </script>
         <?Php
     } else {
-        $queryUpload = "INSERT INTO contact VALUES('', '$nama', '$email', '$komentar', '$currentDateTimeWITA')";
+        $queryUpload = "INSERT INTO contact VALUES('', '$nama', '$email', '$pertanyaan', '$currentDateTimeWITA')";
         $sqlUpload = mysqli_query($conn, $queryUpload);
         if (!$sqlUpload) {
             die("Query gagal (upload): ". mysqli_error($conn));
