@@ -398,7 +398,7 @@ if (isset($_POST["btnLogin"])) {
                                 <div class="comment-option">
                                     <h5 class="co-title">Comment</h5>
                                     <?php
-                                    $sql_select = "SELECT nama, comment FROM komen ORDER BY id";
+                                    $sql_select = "SELECT nama, comment FROM komen ORDER BY id limit 4";
                                     $result_select = $conn->query($sql_select);
                                     if ($result_select->num_rows === 0) {
                                         ?>
