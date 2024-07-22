@@ -111,7 +111,7 @@ if (isset($_SESSION['username'])) {
                     </nav>
                 </div>
                 <div class="col-lg-3">
-                <div class="top-option">
+                    <div class="top-option">
                         <div class="relative">
                             <a id="signIn" href="login.php" class="sign-in-btn">Sign In</a>
 
