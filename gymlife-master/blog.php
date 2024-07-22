@@ -111,7 +111,7 @@ if (isset($_SESSION['username'])) {
                     </nav>
                 </div>
                 <div class="col-lg-3">
-                <div class="top-option">
+                    <div class="top-option">
                         <div class="relative">
                             <a id="signIn" href="login.php" class="sign-in-btn">Sign In</a>
 
@@ -463,6 +463,8 @@ if (isset($_SESSION['username'])) {
     <script src="js/jquery.slicknav.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
 
 
 
