@@ -293,24 +293,14 @@ if (isset($_POST["btnLogin"])) {
                 <div class="col-lg-8 p-0 m-auto">
                     <div class="blog-details-text">
                         <div class="blog-details-title">
-                            <p>Nutrition plays an important role in your exercise performance, muscle recovery, and
-                                achieving fitness goals.
-                                What you eat before, during, and after exercise can significantly impact your workout
-                                results.
-                                This article will provide a practical guide to sports nutrition, explaining what you
-                                need to consume in each
-                                phase of training to maximize results and maintain a healthy body.</p>
-                            <p>Food intake before exercise is very important to provide the energy the body needs during
-                                exercise.
-                                Ideally, consume foods rich in complex carbohydrates and a little protein 1-2 hours
-                                before exercise.
-                                For example, you can choose brown rice with grilled chicken or whole wheat toast with
-                                eggs.</p>
-                            <p>Selama berolahraga, terutama untuk sesi latihan intensitas tinggi atau durasi panjang,
-                                penting untuk menjaga asupan cairan dan energi.
-                                Minumlah air secara teratur untuk menghindari dehidrasi. Anda juga dapat mengonsumsi
-                                minuman olahraga yang mengandung elektrolit
-                                dan karbohidrat sederhana untuk membantu mempertahankan energi.
+                            <p>Proper nutrition is very important to support sports performance and speed up the body's recovery. Understanding what to eat before, during, 
+                                and after exercise can help you achieve your fitness goals more effectively. The following is an explanation of the foods that should be consumed at each stage.</p>
+                            <p>Pre-workout meals should contain complex carbohydrates, protein and a little fat to provide stable energy. Carbohydrates such as whole wheat bread, oatmeal, 
+                                or fruit provide the body with the glucose it needs for energy. Adding protein, such as yogurt or eggs, helps in building and repairing muscle. 
+                                Avoid foods that are high in fat or fiber because they can slow digestion and cause discomfort during exercise. Consume these foods about 2-3 hours before training for optimal results.</p>
+                            <p>During physical activity, especially those lasting more than an hour, it is important to maintain hydration and replace lost electrolytes. Drinking water is the most important step, but for longer sessions, 
+                                a sports drink containing electrolytes and carbohydrates can help maintain energy and prevent fatigue. 
+                                If training is very intense or long, eating light snacks such as bananas or low-fat energy bars can also be beneficial.
                             </p>
                         </div>
                         <div class="blog-details-pic">
@@ -322,11 +312,8 @@ if (isset($_POST["btnLogin"])) {
                             </div>
                         </div>
                         <div class="blog-details-desc">
-                            <p>Dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-                                in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            <p>Recovery after exercise requires a combination of carbohydrates and protein to replenish depleted glycogen and repair damaged muscles. Consuming food within 30 minutes to two hours after exercise is most effective. Examples of good foods are smoothies with whey protein, fruits, 
+                                and vegetables; or chicken with brown rice and green vegetables. Drinking plenty of water is also important to rehydrate after sweating during exercise.
                             </p>
                         </div>
                         <div class="blog-details-quote">
@@ -338,15 +325,11 @@ if (isset($_POST["btnLogin"])) {
                             <span>MEIKE PETERS</span>
                         </div>
                         <div class="blog-details-more-desc">
-                            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                                dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-                                in. . Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</p>
-                            <p>laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure Lorem ipsum dolor sit
-                                amet, consectetur adipisicing elit, sed eiusmod tempor incididunt laboris nisi ut
-                                aliquip commodo consequat. Class aptent taciti sociosqu ad litora torquent per conubia
-                                nostra, per inceptos himenaeos. Mauris vel magna ex. Integer gravida tincidunt accumsan.
-                                Vestibulum nulla mauris, condimentum id felis ac, volutpat volutpat mi qui dolorem.</p>
+                            <p>Protein is essential for muscle repair and growth. Before exercise, foods such as eggs, yogurt, or protein shakes provide the amino acids your muscles need. After exercise, protein helps repair damaged muscle fibers. 
+                                Good sources of protein after exercise include lean meat, fish, nuts, or a protein shake. Adding a little healthy fat, such as from avocado or nuts, can also help in the recovery process.</p>
+                            <p>Hydration is key to maintaining optimal performance and recovery after training. Before exercising, make sure your body is sufficiently hydrated by drinking enough water. During exercise, especially if it lasts longer than an hour, consider drinking a sports drink that contains electrolytes. 
+                                After exercise, continue drinking water to replace lost fluids and support muscle recovery.
+                                 Adding a small amount of salt to food or drinks can help replace electrolytes lost through sweat. By paying attention to what you eat before, during, and after exercise, you can improve your performance, speed recovery, and achieve your fitness goals more effectively.</p>
                         </div>
                         <div class="blog-details-tag-share">
                             <div class="tags">
