@@ -160,7 +160,7 @@ if (isset($_SESSION['username'])) {
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb-text">
-                        <h2>Classes detail</h2>
+                        <h2>Classes</h2>
                         <div class="bt-option">
                             <a href="./index.php">Home</a>
                             <a href="#">Classes</a>
