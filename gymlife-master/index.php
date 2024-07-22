@@ -47,6 +47,14 @@ if (isset($_SESSION['username'])) {
         }
         $masaMembershipRow = mysqli_fetch_assoc($queryMembership);
         $masaMembership = $masaMembershipRow['membership'];
+
+        // $sqlKelas = "SELECT kelas FROM langganan WHERE username = '$usernames'";
+        // $queryKelas = mysqli_query($conn, $sqlKelas);
+        // if (!$queryKelas) {
+        //     die("Query kelas gagal: ". mysqli_error($conn));
+        // }
+        // $kelasRow = mysqli_fetch_assoc($queryKelas);
+        // $kelass = $kelasRow['kelas'];
     } else {
         $masaMembership = 0;
     }
@@ -114,6 +122,7 @@ if (!isset($_SESSION['username'])) {
 
 if (isset($_POST['btn3Month'])) {
     $biaya = 350000;
+    $kelas = "SINGLE CLASS";
     if ($biaya >= $saldo) {
         ?>
         <script>
@@ -131,7 +140,7 @@ if (isset($_POST['btn3Month'])) {
         $date = date('Y-m-d'); // Ubah format menjadi Y-m-d
 
         //upload usernames, date, tanggal berakhir ke table langganan
-        $sqlLangganan = "INSERT INTO langganan (username, tanggal_langganan, langganan_berakhir) VALUES ('$usernames', '$date', '$tanggalBerakhir')";
+        $sqlLangganan = "INSERT INTO langganan (username, kelas, tanggal_langganan, langganan_berakhir) VALUES ('$usernames', '$kelas', '$date', '$tanggalBerakhir')";
         $queryLangganan = mysqli_query($conn, $sqlLangganan);
         if (!$queryLangganan) {
             die("Query langganan gagal: " . mysqli_error($conn));
@@ -151,6 +160,7 @@ if (isset($_POST['btn3Month'])) {
 
 if (isset($_POST['btn6Month'])) {
     $biaya = 600000;
+    $kelas = "DOUBLE CLASS";
     if ($biaya >= $saldo) {
         ?>
         <script>
@@ -168,7 +178,7 @@ if (isset($_POST['btn6Month'])) {
         $date = date('Y-m-d'); // Ubah format menjadi Y-m-d
 
         //upload usernames, date, tanggal berakhir ke table langganan
-        $sqlLangganan = "INSERT INTO langganan (username, tanggal_langganan, langganan_berakhir) VALUES ('$usernames', '$date', '$tanggalBerakhir')";
+        $sqlLangganan = "INSERT INTO langganan (username, kelas, tanggal_langganan, langganan_berakhir) VALUES ('$usernames', '$kelas', '$date', '$tanggalBerakhir')";
         $queryLangganan = mysqli_query($conn, $sqlLangganan);
         if (!$queryLangganan) {
             die("Query langganan gagal: " . mysqli_error($conn));
@@ -188,6 +198,7 @@ if (isset($_POST['btn6Month'])) {
 
 if (isset($_POST['btn1Year'])) {
     $biaya = 1150000;
+    $kelas = "SPECIAL CLASS";
     if ($biaya >= $saldo) {
         ?>
         <script>
@@ -205,7 +216,7 @@ if (isset($_POST['btn1Year'])) {
         $date = date('Y-m-d'); // Ubah format menjadi Y-m-d
 
         //upload usernames, date, tanggal berakhir ke table langganan
-        $sqlLangganan = "INSERT INTO langganan (username, tanggal_langganan, langganan_berakhir) VALUES ('$usernames', '$date', '$tanggalBerakhir')";
+        $sqlLangganan = "INSERT INTO langganan (username, kelas, tanggal_langganan, langganan_berakhir) VALUES ('$usernames', '$kelas', '$date', '$tanggalBerakhir')";
         $queryLangganan = mysqli_query($conn, $sqlLangganan);
         if (!$queryLangganan) {
             die("Query langganan gagal: " . mysqli_error($conn));
@@ -636,7 +647,7 @@ if (isset($_POST['btn1Year'])) {
                                 <li>Monthly membership</li>
                                 <li>Time restrictions apply</li>
                             </ul>
-                            <button onclick="confirmSubscription()" type="submit" class="btnLangganan" name="btn3Month">
+                            <button onclick="confirmSubscription()" type="submit" class="btnLangganan text-orange-500" name="btn3Month">
                                 <a class="primary-btn pricing-btn">Enroll now</a>
                             </button>
                         </div>
@@ -656,8 +667,8 @@ if (isset($_POST['btn1Year'])) {
                                 <li>Monthly membership</li>
                                 <li>No time restrictions</li>
                             </ul>
-                            <button onclick="confirmSubscription()" class="btnLangganan" name="btn6Month">
-                                <a class="primary-btn pricing-btn">Enroll now</a>
+                            <button onclick="confirmSubscription()" class="btnLangganan text-orange-500" name="btn6Month">
+                                <a class="primary-btn pricing-btn ">Enroll now</a>
                             </button>
                         </div>
                     </div>
@@ -678,7 +689,7 @@ if (isset($_POST['btn1Year'])) {
                                 <li>Access to exclusive events</li>
                                 <li>Free nutritional guidance</li>
                             </ul>
-                            <button onclick="confirmSubscription()" class="btnLangganan" name="btn1Year">
+                            <button onclick="confirmSubscription()" class="btnLangganan text-orange-500" name="btn1Year">
                                 <a class="primary-btn pricing-btn">Enroll now</a>
                             </button>
                         </div>

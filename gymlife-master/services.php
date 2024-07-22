@@ -30,6 +30,171 @@ if (isset($_SESSION['username'])) {
 
     $saldoRow = mysqli_fetch_assoc($querySaldo);
     $saldo = $saldoRow['saldo'];
+
+    //masa membership
+    $sqlCekMembership = "SELECT * FROM langganan WHERE username = '$usernames'";
+    $queryCekMembership = mysqli_query($conn, $sqlCekMembership);
+    if (mysqli_num_rows($queryCekMembership) > 0) {
+        //waktu sekarang
+        $date = date('Y-m-d');
+        // waktu membership
+        $sqlMembership = "SELECT ABS(DATEDIFF('$date', langganan_berakhir)) AS membership FROM langganan WHERE username = '$usernames'";
+        $queryMembership = mysqli_query($conn, $sqlMembership);
+        if (!$queryMembership) {
+            die("Query gagal membership: " . mysqli_error($conn));
+        }
+        $masaMembershipRow = mysqli_fetch_assoc($queryMembership);
+        $masaMembership = $masaMembershipRow['membership'];
+    } else {
+        $masaMembership = 0;
+    }
+    ?>
+    <script>
+        function confirmSubscription() {
+            var result = confirm("Apakah Anda yakin ingin melanjutkan langganan?");
+            if (result) {
+                document.getElementById('subscriptionForm').submit();
+            } else {
+                event.preventDefault();
+            }
+        }
+    </script>
+    <?php
+}
+
+//Jika user belum melakukan login maka akan di arahkan login terlebih dahulu
+if (!isset($_SESSION['username'])) {
+    ?>
+    <script>
+        window.onload = function () {
+            const btnLangganan = document.querySelectorAll('.btnLangganan');
+            btnLangganan.forEach(function (button) {
+                button.setAttribute('data-modal-target', 'authentication-modal');
+                button.setAttribute('data-modal-toggle', 'authentication-modal');
+            });
+            document.querySelectorAll('.btnLangganan').forEach(button => {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault(); // Mencegah aksi default yang mungkin menyebabkan reload
+                    // Lakukan aksi lain
+                });
+            });
+        }
+    </script>
+    <?php
+}
+
+if (isset($_POST['btn3Month'])) {
+    $biaya = 350000;
+    $kelas = "SINGLE CLASS";
+    if ($biaya >= $saldo) {
+        ?>
+        <script>
+            alert("SALDO ANDA TIDAK CUKUP!");
+        </script>
+        <?php
+        die();
+    } else {
+        // Inisialisasi tanggal saat ini
+        $tanggalLangganan = new DateTime(); // Tanggal saat ini
+        // Tambahkan 30 hari ke tanggal saat ini
+        $tanggalLangganan->modify('+90 days');
+        // Format tanggal baru
+        $tanggalBerakhir = $tanggalLangganan->format('Y-m-d'); // Ubah format menjadi Y-m-d
+        $date = date('Y-m-d'); // Ubah format menjadi Y-m-d
+
+        //upload usernames, date, tanggal berakhir ke table langganan
+        $sqlLangganan = "INSERT INTO langganan (username, kelas, tanggal_langganan, langganan_berakhir) VALUES ('$usernames', '$kelas', '$date', '$tanggalBerakhir')";
+        $queryLangganan = mysqli_query($conn, $sqlLangganan);
+        if (!$queryLangganan) {
+            die("Query langganan gagal: " . mysqli_error($conn));
+        }
+
+        //UPDATE SALDO DI DATABASE
+        $sqlUpdateSaldo = "UPDATE user SET saldo = saldo - $biaya WHERE username = $usernames";
+        $queryUpdateSaldo = mysqli_query($conn, $sqlUpdateSaldo);
+        if (!$queryUpdateSaldo) {
+            die("Query Update saldo gagal: " . mysqli_error($conn));
+        }
+        //UPDATE SALDO DI TAMPILAN
+        $saldo -= $biaya;
+        header("Location: index.php");
+    }
+}
+
+if (isset($_POST['btn6Month'])) {
+    $biaya = 600000;
+    $kelas = "DOUBLE CLASS";
+    if ($biaya >= $saldo) {
+        ?>
+        <script>
+            alert("SALDO ANDA TIDAK CUKUP!");
+        </script>
+        <?php
+        die();
+    } else {
+        // Inisialisasi tanggal saat ini
+        $tanggalLangganan = new DateTime(); // Tanggal saat ini
+        // Tambahkan 30 hari ke tanggal saat ini
+        $tanggalLangganan->modify('+180 days');
+        // Format tanggal baru
+        $tanggalBerakhir = $tanggalLangganan->format('Y-m-d'); // Ubah format menjadi Y-m-d
+        $date = date('Y-m-d'); // Ubah format menjadi Y-m-d
+
+        //upload usernames, date, tanggal berakhir ke table langganan
+        $sqlLangganan = "INSERT INTO langganan (username, kelas, tanggal_langganan, langganan_berakhir) VALUES ('$usernames', '$kelas', '$date', '$tanggalBerakhir')";
+        $queryLangganan = mysqli_query($conn, $sqlLangganan);
+        if (!$queryLangganan) {
+            die("Query langganan gagal: " . mysqli_error($conn));
+        }
+
+        //UPDATE SALDO DI DATABASE
+        $sqlUpdateSaldo = "UPDATE user SET saldo = saldo - $biaya WHERE username = $usernames";
+        $queryUpdateSaldo = mysqli_query($conn, $sqlUpdateSaldo);
+        if (!$queryUpdateSaldo) {
+            die("Query Update saldo gagal: " . mysqli_error($conn));
+        }
+        //UPDATE SALDO DI TAMPILAN
+        $saldo -= $biaya;
+        header("Location: index.php");
+    }
+}
+
+if (isset($_POST['btn1Year'])) {
+    $biaya = 1150000;
+    $kelas = "SPECIAL CLASS";
+    if ($biaya >= $saldo) {
+        ?>
+        <script>
+            alert("SALDO ANDA TIDAK CUKUP!");
+        </script>
+        <?php
+        die();
+    } else {
+        // Inisialisasi tanggal saat ini
+        $tanggalLangganan = new DateTime(); // Tanggal saat ini
+        // Tambahkan 30 hari ke tanggal saat ini
+        $tanggalLangganan->modify('+365 days');
+        // Format tanggal baru
+        $tanggalBerakhir = $tanggalLangganan->format('Y-m-d'); // Ubah format menjadi Y-m-d
+        $date = date('Y-m-d'); // Ubah format menjadi Y-m-d
+
+        //upload usernames, date, tanggal berakhir ke table langganan
+        $sqlLangganan = "INSERT INTO langganan (username, kelas, tanggal_langganan, langganan_berakhir) VALUES ('$usernames', '$kelas', '$date', '$tanggalBerakhir')";
+        $queryLangganan = mysqli_query($conn, $sqlLangganan);
+        if (!$queryLangganan) {
+            die("Query langganan gagal: " . mysqli_error($conn));
+        }
+
+        //UPDATE SALDO DI DATABASE
+        $sqlUpdateSaldo = "UPDATE user SET saldo = saldo - $biaya WHERE username = $usernames";
+        $queryUpdateSaldo = mysqli_query($conn, $sqlUpdateSaldo);
+        if (!$queryUpdateSaldo) {
+            die("Query Update saldo gagal: " . mysqli_error($conn));
+        }
+        //UPDATE SALDO DI TAMPILAN
+        $saldo -= $biaya;
+        header("Location: index.php");
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -212,6 +377,13 @@ if (isset($_SESSION['username'])) {
                                 </div>
 
                                 <div class="p-2">
+                                    <p class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm "
+                                        role="menuitem">
+                                        Masa aktif: <?php echo +$masaMembership; ?> hari
+                                    </p>
+                                </div>
+
+                                <div class="p-2">
                                     <form method="POST" action="logout.php">
                                         <button type="submit"
                                             class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
@@ -272,7 +444,8 @@ if (isset($_SESSION['username'])) {
                 <div class="col-lg-3 order-lg-2 col-md-6 p-0">
                     <div class="ss-text">
                         <h4>Yoga</h4>
-                        <p>Yoga is a holistic practice that combines physical postures, breath control, meditation, and ethical principles to promote overall well-being. </p>
+                        <p>Yoga is a holistic practice that combines physical postures, breath control, meditation, and
+                            ethical principles to promote overall well-being. </p>
                         <a href="class-details.php">Explore</a>
                     </div>
                 </div>
@@ -296,7 +469,8 @@ if (isset($_SESSION['username'])) {
                 <div class="col-lg-3 order-lg-7 col-md-6 p-0">
                     <div class="ss-text second-row">
                         <h4>Body Building</h4>
-                        <p>Bodybuilding is a physical activity that focuses on muscle development and body definition.</p>
+                        <p>Bodybuilding is a physical activity that focuses on muscle development and body definition.
+                        </p>
                         <a href="#">Explore</a>
                     </div>
                 </div>
@@ -325,8 +499,7 @@ if (isset($_SESSION['username'])) {
                     <div class="bs-text service-banner">
                         <h2>Exercise until the body obeys.</h2>
                         <div class="bt-tips">Where health, beauty and fitness meet.</div>
-                        <a href="./video/video.mp4" class="play-btn video-popup"><i
-                                class="fa fa-caret-right"></i></a>
+                        <a href="./video/video.mp4" class="play-btn video-popup"><i class="fa fa-caret-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -335,7 +508,7 @@ if (isset($_SESSION['username'])) {
     <!-- Banner Section End -->
 
     <!-- Pricing Section Begin -->
-    <section class="pricing-section service-pricing spad">
+    <section class="pricing-section spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -345,64 +518,74 @@ if (isset($_SESSION['username'])) {
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-8">
-                    <div class="ps-item">
-                        <h3>3 Month unlimited</h3>
-                        <div class="pi-price">
-                            <h2>Rp. 350.000</h2>
-                            <span>SINGLE CLASS</span>
+            <form id="myForm" method="post">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-8">
+                        <div class="ps-item">
+                            <h3>3 Month unlimited</h3>
+                            <div class="pi-price">
+                                <h2>Rp. 350.000</h2>
+                                <span>SINGLE CLASS</span>
+                            </div>
+                            <ul>
+                                <li>Free riding</li>
+                                <li>Limited equipments</li>
+                                <li>Group trainer</li>
+                                <li>Weight loss classes</li>
+                                <li>Monthly membership</li>
+                                <li>Time restrictions apply</li>
+                            </ul>
+                            <button onclick="confirmSubscription()" type="submit" class="btnLangganan text-orange-500"
+                                name="btn3Month">
+                                <a class="primary-btn pricing-btn">Enroll now</a>
+                            </button>
                         </div>
-                        <ul>
-                            <li>Free riding</li>
-                            <li>Limited equipments</li>
-                            <li>Group trainer</li>
-                            <li>Weight loss classes</li>
-                            <li>Monthly membership</li>
-                            <li>Time restrictions apply</li>
-                        </ul>
-                        <a href="#" class="primary-btn pricing-btn">Enroll now</a>
+                    </div>
+                    <div class="col-lg-4 col-md-8">
+                        <div class="ps-item">
+                            <h3>6 Month unlimited</h3>
+                            <div class="pi-price">
+                                <h2>Rp. 600.000</h2>
+                                <span>DOUBLE CLASS</span>
+                            </div>
+                            <ul>
+                                <li>Free riding</li>
+                                <li>Unlimited equipments</li>
+                                <li>Personal trainer</li>
+                                <li>Weight loss classes</li>
+                                <li>Monthly membership</li>
+                                <li>No time restrictions</li>
+                            </ul>
+                            <button onclick="confirmSubscription()" class="btnLangganan text-orange-500"
+                                name="btn6Month">
+                                <a class="primary-btn pricing-btn ">Enroll now</a>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-8">
+                        <div class="ps-item">
+                            <h3>1 Year unlimited</h3>
+                            <div class="pi-price">
+                                <h2>Rp. 1.150.000</h2>
+                                <span>SPECIAL CLASS</span>
+                            </div>
+                            <ul>
+                                <li>Free riding</li>
+                                <li>Unlimited premium equipments</li>
+                                <li>Personal elite trainer</li>
+                                <li>Weight loss & muscle gain classes</li>
+                                <li>Yearly membership</li>
+                                <li>No time restrictions</li>
+                                <li>Access to exclusive events</li>
+                                <li>Free nutritional guidance</li>
+                            </ul>
+                            <button onclick="confirmSubscription()" class="btnLangganan text-orange-500"
+                                name="btn1Year">
+                                <a class="primary-btn pricing-btn">Enroll now</a>
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-8">
-                    <div class="ps-item">
-                        <h3>6 Month unlimited</h3>
-                        <div class="pi-price">
-                            <h2>Rp. 600.000</h2>
-                            <span>DOUBLE CLASS</span>
-                        </div>
-                        <ul>
-                            <li>Free riding</li>
-                            <li>Unlimited equipments</li>
-                            <li>Personal trainer</li>
-                            <li>Weight loss classes</li>
-                            <li>Monthly membership</li>
-                            <li>No time restrictions</li>
-                        </ul>
-                        <a href="#" class="primary-btn pricing-btn">Enroll now</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-8">
-                    <div class="ps-item">
-                        <h3>1 Year unlimited</h3>
-                        <div class="pi-price">
-                            <h2>Rp. 1.150.000</h2>
-                            <span>SPECIAL CLASS</span>
-                        </div>
-                        <ul>
-                            <li>Free riding</li>
-                            <li>Unlimited premium equipments</li>
-                            <li>Personal elite trainer</li>
-                            <li>Weight loss & muscle gain classes</li>
-                            <li>Yearly membership</li>
-                            <li>No time restrictions</li>
-                            <li>Access to exclusive events</li>
-                            <li>Free nutritional guidance</li>
-                        </ul>
-                        <a href="#" class="primary-btn pricing-btn">Enroll now</a>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
     <!-- Pricing Section End -->
@@ -415,7 +598,7 @@ if (isset($_SESSION['username'])) {
                     <div class="gt-text">
                         <i class="fa fa-map-marker"></i>
                         <p>Jl. Abdullah Daeng Sirua No.84, Masale, Kec. Panakkukang, Kota Makassar, Sulawesi
-                            Selatan,<br/> 90231</p>
+                            Selatan,<br /> 90231</p>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -454,7 +637,8 @@ if (isset($_SESSION['username'])) {
                         <div class="fa-social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="https://youtu.be/FOJHzV5ERgQ?si=9oxEa6r1_nlYvDbs"><i class="fa fa-youtube-play"></i></a>
+                            <a href="https://youtu.be/FOJHzV5ERgQ?si=9oxEa6r1_nlYvDbs"><i
+                                    class="fa fa-youtube-play"></i></a>
                             <a href="https://www.instagram.com/celebes_gym/"><i class="fa fa-instagram"></i></a>
                             <a href="mailto:celebesgym@gmail.com"><i class="fa  fa-envelope-o"></i></a>
                         </div>
@@ -493,7 +677,8 @@ if (isset($_SESSION['username'])) {
                             </ul>
                         </div>
                         <div class="fw-recent">
-                            <h6><a href="./blog.php">Fitness: The best exercise to lose belly fat and tone up...</a></h6>
+                            <h6><a href="./blog.php">Fitness: The best exercise to lose belly fat and tone up...</a>
+                            </h6>
                             <ul>
                                 <li>3 min read</li>
                                 <li>20 Comment</li>
@@ -506,8 +691,12 @@ if (isset($_SESSION['username'])) {
                 <div class="col-lg-12 text-center">
                     <div class="copyright-text">
                         <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This
+                            template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a
+                                href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
                     </div>
                 </div>
             </div>
