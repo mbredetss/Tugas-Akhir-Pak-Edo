@@ -1,6 +1,28 @@
 <?php
 include "koneksi.php";
 session_start();
+
+//function langganan
+function langganan() {
+    ?>
+        <script>
+            window.onload = function () {
+                const btnLangganan = document.querySelectorAll('.btnLangganan');
+                btnLangganan.forEach(function (button) {
+                    button.setAttribute('data-modal-target', 'popup-modal');
+                    button.setAttribute('data-modal-toggle', 'popup-modal');
+                });
+                document.querySelectorAll('.btnLangganan').forEach(button => {
+                    button.addEventListener('click', function (e) {
+                        e.preventDefault(); // Mencegah aksi default yang mungkin menyebabkan reload
+                        // Lakukan aksi lain
+                    });
+                });
+            }
+        </script>
+    <?php
+}
+
 // Periksa apakah session username dan password ada
 if (isset($_SESSION['username'])) {
     $usernames = $_SESSION['username'];
@@ -60,7 +82,6 @@ if (isset($_POST["btnLogin"])) {
         }
     }
 }
-
 //LANGGANAN 3MONTH
 if (!isset($_SESSION['username'])) {
     ?>
@@ -80,8 +101,12 @@ if (!isset($_SESSION['username'])) {
         }
     </script>
     <?php
-} else if (isset($_POST['btn3Month'])) {
-
+    
+} else if (isset($_SESSION['username'])) {
+    if (isset($_POST['btn3Month'])) {
+        langganan();
+        
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -127,13 +152,13 @@ if (!isset($_SESSION['username'])) {
         </div>
         <nav class="canvas-menu mobile-menu">
             <ul>
-                <li><a href="./index.php">Home</a></li>
-                <li><a href="./about-us.php">About Us</a></li>
-                <li><a href="./classes.php">Classes</a></li>
-                <li><a href="./services.php">Services</a></li>
-                <li><a href="./team.php">Our Team</a></li>
-                <li><a href="./blog.php">Article</a></li>
-                <li><a href="./contact.php">Contact</a></li>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./about-us.html">About Us</a></li>
+                <li><a href="./classes.html">Classes</a></li>
+                <li><a href="./services.html">Services</a></li>
+                <li><a href="./team.html">Our Team</a></li>
+                <li><a href="./blog.html">Article</a></li>
+                <li><a href="./contact.html">Contact</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -152,7 +177,7 @@ if (!isset($_SESSION['username'])) {
             <div class="row">
                 <div class="col-lg-3">
                     <div class="logo">
-                        <a href="./index.php">
+                        <a href="./index.html">
                             <img src="img/logoCelebes.png" alt="">
                         </a>
                     </div>
@@ -160,13 +185,13 @@ if (!isset($_SESSION['username'])) {
                 <div class="col-lg-6">
                     <nav class="nav-menu">
                         <ul>
-                            <li class="active"><a href="./index.php">Home</a></li>
-                            <li><a href="./about-us.php">About Us</a></li>
-                            <li><a href="./class-details.php">Classes</a></li>
-                            <li><a href="./services.php">Services</a></li>
-                            <li><a href="./team.php">Our Team</a></li>
-                            <li><a href="./blog.php">Article</a></li>
-                            <li><a href="./contact.php">Contact</a></li>
+                            <li class="active"><a href="./index.html">Home</a></li>
+                            <li><a href="./about-us.html">About Us</a></li>
+                            <li><a href="./class-details.html">Classes</a></li>
+                            <li><a href="./services.html">Services</a></li>
+                            <li><a href="./team.html">Our Team</a></li>
+                            <li><a href="./blog.html">Article</a></li>
+                            <li><a href="./contact.html">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -240,6 +265,43 @@ if (!isset($_SESSION['username'])) {
                                     </div>
                                 </div>
                             </div>
+
+                            <div id="popup-modal" tabindex="-1"
+                                class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                <div class="relative p-4 w-full max-w-md max-h-full">
+                                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                        <button type="button"
+                                            class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                            data-modal-hide="popup-modal">
+                                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                fill="none" viewBox="0 0 14 14">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                            </svg>
+                                            <span class="sr-only">Close modal</span>
+                                        </button>
+                                        <div class="p-4 md:p-5 text-center">
+                                            <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
+                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 20 20">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                            </svg>
+                                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                                                Apakah Anda yakin untuk berlangganan?</h3>
+                                            <button data-modal-hide="popup-modal" type="button"
+                                                class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                                Ya
+                                            </button>
+                                            <button data-modal-hide="popup-modal" type="button"
+                                                class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                                Tidak</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- Profile -->
                             <a hidden id="btnProfile" class="user-profile fa fa-user"></a>
                             <span id="textBase" hidden class="text-base font-medium text-orange-500">
@@ -296,7 +358,7 @@ if (!isset($_SESSION['username'])) {
                             <div class="hi-text">
                                 <span>Shape your body</span>
                                 <h1>Be <strong>strong</strong> traning hard</h1>
-                                <a href="./about-us.php" class="primary-btn">Get info</a>
+                                <a href="#" class="primary-btn">Get info</a>
                             </div>
                         </div>
                     </div>
@@ -309,7 +371,7 @@ if (!isset($_SESSION['username'])) {
                             <div class="hi-text">
                                 <span>Shape your body</span>
                                 <h1>Be <strong>strong</strong> traning hard</h1>
-                                <a href="./about-us.php" class="primary-btn">Get info</a>
+                                <a href="#" class="primary-btn">Get info</a>
                             </div>
                         </div>
                     </div>
@@ -684,9 +746,9 @@ if (!isset($_SESSION['username'])) {
                         <div class="fa-social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="https://youtu.be/FOJHzV5ERgQ?si=9oxEa6r1_nlYvDbs"><i class="fa fa-youtube-play"></i></a>
-                            <a href="https://www.instagram.com/celebes_gym/"><i class="fa fa-instagram"></i></a>
-                            <a href="mailto:celebesgym@gmail.com"><i class="fa  fa-envelope-o"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa  fa-envelope-o"></i></a>
                         </div>
                     </div>
                 </div>
@@ -694,10 +756,10 @@ if (!isset($_SESSION['username'])) {
                     <div class="fs-widget">
                         <h4>Useful links</h4>
                         <ul>
-                            <li><a href="./about-us.php">About</a></li>
-                            <li><a href="./blog.php">Article</a></li>
-                            <li><a href="./class-details.php">Classes</a></li>
-                            <li><a href="./contact.php">Contact</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Classes</a></li>
+                            <li><a href="#">Contact</a></li>
                         </ul>
                     </div>
                 </div>
@@ -705,10 +767,10 @@ if (!isset($_SESSION['username'])) {
                     <div class="fs-widget">
                         <h4>Support</h4>
                         <ul>
-                            <li><a href="./login.php">Login</a></li>
-                            <li><a href="./logout.php">Logout</a></li>
+                            <li><a href="#">Login</a></li>
                             <li><a href="#">My account</a></li>
-                            <li><a href="https://youtu.be/FOJHzV5ERgQ?si=9oxEa6r1_nlYvDbs">Subscribe</a></li>
+                            <li><a href="#">Subscribe</a></li>
+                            <li><a href="#">Contact</a></li>
                         </ul>
                     </div>
                 </div>
@@ -716,14 +778,14 @@ if (!isset($_SESSION['username'])) {
                     <div class="fs-widget">
                         <h4>Tips & Guides</h4>
                         <div class="fw-recent">
-                            <h6><a href="./blog.php">Physical fitness may help prevent depression, anxiety</a></h6>
+                            <h6><a href="#">Physical fitness may help prevent depression, anxiety</a></h6>
                             <ul>
                                 <li>3 min read</li>
                                 <li>20 Comment</li>
                             </ul>
                         </div>
                         <div class="fw-recent">
-                            <h6><a href="./blog.php">Fitness: The best exercise to lose belly fat and tone up...</a></h6>
+                            <h6><a href="#">Fitness: The best exercise to lose belly fat and tone up...</a></h6>
                             <ul>
                                 <li>3 min read</li>
                                 <li>20 Comment</li>

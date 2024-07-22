@@ -144,10 +144,10 @@ if (isset($_POST["btnLogin"])) {
                             <li><a href="./team.php">Our Team</a></li>
                             <li class="active"><a href="./blog.php">Article</a>
                                 <ul class="dropdown">
-                                    <li><a href="./blog.html">Back to Article</a></li>
+                                    <li><a href="./blog.php">Back to Article</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./contact.html">Contact</a></li>
+                            <li><a href="./contact.php">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -475,13 +475,13 @@ if (isset($_POST["btnLogin"])) {
                         <p>Celebes Gym is a fitness center that provides modern facilities and professional services to
                             help you achieve your health and fitness goals.
                             With a variety of specially designed classes and programs, we are committed to providing the
-                            best fitness experience for all our members.</p>
+                            best fitness experience for all our members..</p>
                         <div class="fa-social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="https://youtu.be/FOJHzV5ERgQ?si=9oxEa6r1_nlYvDbs"><i class="fa fa-youtube-play"></i></a>
-                            <a href="https://www.instagram.com/celebes_gym/"><i class="fa fa-instagram"></i></a>
-                            <a href="mailto:celebesgym@gmail.com"><i class="fa  fa-envelope-o"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa  fa-envelope-o"></i></a>
                         </div>
                     </div>
                 </div>
@@ -489,10 +489,10 @@ if (isset($_POST["btnLogin"])) {
                     <div class="fs-widget">
                         <h4>Useful links</h4>
                         <ul>
-                            <li><a href="./about-us.php">About</a></li>
-                            <li><a href="./blog.php">Blog</a></li>
-                            <li><a href="./class-details.php">Classes</a></li>
-                            <li><a href="./contact.php">Contact</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Classes</a></li>
+                            <li><a href="#">Contact</a></li>
                         </ul>
                     </div>
                 </div>
@@ -500,10 +500,10 @@ if (isset($_POST["btnLogin"])) {
                     <div class="fs-widget">
                         <h4>Support</h4>
                         <ul>
-                            <li><a href="./login.php">Login</a></li>
-                            <li><a href="./logout.php">Logout</a></li>
+                            <li><a href="#">Login</a></li>
                             <li><a href="#">My account</a></li>
-                            <li><a href="https://youtu.be/FOJHzV5ERgQ?si=9oxEa6r1_nlYvDbs">Subscribe</a></li>
+                            <li><a href="#">Subscribe</a></li>
+                            <li><a href="#">Contact</a></li>
                         </ul>
                     </div>
                 </div>

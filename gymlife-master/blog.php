@@ -120,8 +120,73 @@ if (isset($_SESSION['username'])) {
                 <div class="col-lg-3">
                     <div class="top-option">
                         <div class="relative">
-                            <a id="signIn" href="login.php" class="sign-in-btn">Sign In</a>
+                            <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
+                                type="button">
+                                <a id="signIn" class="sign-in-btn">Sign In</a>
+                            </button>
 
+                            <!-- Main modal -->
+                            <div id="authentication-modal" tabindex="-1" aria-hidden="true"
+                                class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                <div class="relative p-4 w-full max-w-md max-h-full">
+                                    <!-- Modal content -->
+                                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                        <!-- Modal header -->
+                                        <div
+                                            class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                                Masuk ke akun Anda!
+                                            </h3>
+                                            <button type="button"
+                                                class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                data-modal-hide="authentication-modal">
+                                                <svg class="w-3 h-3" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2"
+                                                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                </svg>
+                                                <span class="sr-only">Close modal</span>
+                                            </button>
+                                        </div>
+                                        <!-- Modal body -->
+                                        <div class="p-4 md:p-5">
+                                            <form method="post" class="space-y-4">
+                                                <div>
+                                                    <label for="username"
+                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                        Username
+                                                    </label>
+                                                    <input type="text" name="username" id="username"
+                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                                        required />
+                                                </div>
+                                                <div>
+                                                    <label for="password"
+                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                        Password</label>
+                                                    <input type="password" name="password" id="password"
+                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                                        required />
+                                                </div>
+                                                <div class="col-span-6">
+                                                    <div id="loginAlert" hidden class="alert alert-danger" role="alert">
+                                                        Username atau password salah!
+                                                    </div>
+                                                </div>
+                                                <button type="submit" name="btnLogin"
+                                                    class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login
+                                                    to your account</button>
+                                                <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
+                                                    Not registered? <a href="registrasi.php"
+                                                        class="text-blue-700 hover:underline dark:text-blue-500">Create
+                                                        account</a>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- Profile -->
                             <a hidden id="btnProfile" class="user-profile fa fa-user"></a>
                             <span id="textBase" hidden class="text-base font-medium text-orange-500">
@@ -136,6 +201,13 @@ if (isset($_SESSION['username'])) {
                                         role="menuitem">
                                         Edit profile
                                     </a>
+                                </div>
+
+                                <div class="p-2">
+                                    <p class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm "
+                                        role="menuitem">
+                                        Saldo : <?php echo $saldo; ?>
+                                    </p>
                                 </div>
 
                                 <div class="p-2">
@@ -470,6 +542,7 @@ if (isset($_SESSION['username'])) {
     <script src="js/jquery.slicknav.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/script.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
 
