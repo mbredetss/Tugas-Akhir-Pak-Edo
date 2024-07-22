@@ -85,7 +85,8 @@ include "koneksi.php";
                             <li class="active"><a href="./blog.html">Article</a>
                                 <ul class="dropdown">
                                     <li><a href="./blog.html">Back to Article</a></li>
-                                </ul></li>
+                                </ul>
+                            </li>
                             <li><a href="./contact.html">Contact</a></li>
                         </ul>
                     </nav>
@@ -96,13 +97,14 @@ include "koneksi.php";
                             <a href="registrasi.php" class="sign-in-btn">Sign In</a>
                             <a id="btnProfile" class="user-profile fa fa-user">
                             </a>
-                            <div id="listOption" hidden class="absolute end-0 z-10 mt-2 w-56 divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg"
+                            <div id="listOption" hidden
+                                class="absolute end-0 z-10 mt-2 w-56 divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg"
                                 role="menu">
                                 <div class="p-2">
                                     <a href="#"
                                         class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm  hover:bg-orange-500"
                                         role="menuitem">
-                                          Edit profile
+                                        Edit profile
                                     </a>
                                 </div>
 
@@ -153,15 +155,23 @@ include "koneksi.php";
                 <div class="col-lg-8 p-0 m-auto">
                     <div class="blog-details-text">
                         <div class="blog-details-title">
-                            <p>Nutrition plays an important role in your exercise performance, muscle recovery, and achieving fitness goals. 
-                                What you eat before, during, and after exercise can significantly impact your workout results. 
-                                This article will provide a practical guide to sports nutrition, explaining what you need to consume in each 
+                            <p>Nutrition plays an important role in your exercise performance, muscle recovery, and
+                                achieving fitness goals.
+                                What you eat before, during, and after exercise can significantly impact your workout
+                                results.
+                                This article will provide a practical guide to sports nutrition, explaining what you
+                                need to consume in each
                                 phase of training to maximize results and maintain a healthy body.</p>
-                            <p>Food intake before exercise is very important to provide the energy the body needs during exercise. 
-                                Ideally, consume foods rich in complex carbohydrates and a little protein 1-2 hours before exercise. 
-                                For example, you can choose brown rice with grilled chicken or whole wheat toast with eggs.</p>
-                            <p>Selama berolahraga, terutama untuk sesi latihan intensitas tinggi atau durasi panjang, penting untuk menjaga asupan cairan dan energi. 
-                                Minumlah air secara teratur untuk menghindari dehidrasi. Anda juga dapat mengonsumsi minuman olahraga yang mengandung elektrolit 
+                            <p>Food intake before exercise is very important to provide the energy the body needs during
+                                exercise.
+                                Ideally, consume foods rich in complex carbohydrates and a little protein 1-2 hours
+                                before exercise.
+                                For example, you can choose brown rice with grilled chicken or whole wheat toast with
+                                eggs.</p>
+                            <p>Selama berolahraga, terutama untuk sesi latihan intensitas tinggi atau durasi panjang,
+                                penting untuk menjaga asupan cairan dan energi.
+                                Minumlah air secara teratur untuk menghindari dehidrasi. Anda juga dapat mengonsumsi
+                                minuman olahraga yang mengandung elektrolit
                                 dan karbohidrat sederhana untuk membantu mempertahankan energi.
                             </p>
                         </div>
@@ -245,13 +255,17 @@ include "koneksi.php";
                                 </div>
                             </div>
                             <?php
-                            if (isset($_POST['submit']))
-                            {
-                            $nama = $_POST['nama'];
-                            $email = $_POST['email'];
-                            $comment = $_POST['comment'];
-                            $sql = "INSERT INTO komen VALUES ('','$nama', '$email', '$comment')";
-                            $conn->query($sql) === TRUE;
+                            if (isset($_POST['submit'])) {
+                                if (isset($_SESSION['username'])) {
+                                    $nama = $_POST['nama'];
+                                    $email = $_POST['email'];
+                                    $comment = $_POST['comment'];
+                                    $sql = "INSERT INTO komen VALUES ('','$nama', '$email', '$comment')";
+                                    $conn->query($sql) === TRUE;
+                                }
+                                else {
+                                    echo "hi";
+                                }
                             }
                             ?>
 
@@ -259,38 +273,34 @@ include "koneksi.php";
                                 <div class="comment-option">
                                     <h5 class="co-title">Comment</h5>
                                     <?php
-                                $sql_select = "SELECT nama, comment FROM komen ORDER BY id";
-                                $result_select = $conn->query($sql_select);
-                                if ($result_select->num_rows === 0)
-                                {
-                                ?>
-                                <?php
-                                }
-                                else
-                                {
-                                while ($komen = $result_select->fetch_assoc())
-                                {
-                                ?>
-                                    <div class="co-item">
-                                        <div class="co-widget">
-                                            <a href="#"><i class="fa fa-heart-o"></i></a>
-                                            <a href="#"><i class="fa fa-share-square-o"></i></a>
-                                        </div>
-                                        <div class="co-pic">
-                                            <img src="img/blog/details/comment-1.jpg" alt="">
-                                            <h5><?=$komen['nama']?></h5>
-                                        </div>
-                                        <div class="co-text">
-                                            <p><?=$komen['comment']?></p>
-                                        </div>                             
-                                    </div>
-                                    <?php
-                            }
-                            }
-                            ?>          
+                                    $sql_select = "SELECT nama, comment FROM komen ORDER BY id";
+                                    $result_select = $conn->query($sql_select);
+                                    if ($result_select->num_rows === 0) {
+                                        ?>
+                                        <?php
+                                    } else {
+                                        while ($komen = $result_select->fetch_assoc()) {
+                                            ?>
+                                            <div class="co-item">
+                                                <div class="co-widget">
+                                                    <a href="#"><i class="fa fa-heart-o"></i></a>
+                                                    <a href="#"><i class="fa fa-share-square-o"></i></a>
+                                                </div>
+                                                <div class="co-pic">
+                                                    <img src="img/blog/details/comment-1.jpg" alt="">
+                                                    <h5><?= $komen['nama'] ?></h5>
+                                                </div>
+                                                <div class="co-text">
+                                                    <p><?= $komen['comment'] ?></p>
+                                                </div>
+                                            </div>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -306,7 +316,7 @@ include "koneksi.php";
                 <div class="col-lg-4">
                     <div class="gt-text">
                         <i class="fa fa-map-marker"></i>
-                        <p>333 Middle Winchendon Rd, Rindge,<br/> NH 03461</p>
+                        <p>333 Middle Winchendon Rd, Rindge,<br /> NH 03461</p>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -395,8 +405,12 @@ include "koneksi.php";
                 <div class="col-lg-12 text-center">
                     <div class="copyright-text">
                         <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This
+                            template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a
+                                href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
                     </div>
                 </div>
             </div>
@@ -417,4 +431,5 @@ include "koneksi.php";
 
 
 </body>
+
 </html>
