@@ -127,13 +127,13 @@ if (!isset($_SESSION['username'])) {
         </div>
         <nav class="canvas-menu mobile-menu">
             <ul>
-                <li><a href="./index.html">Home</a></li>
-                <li><a href="./about-us.html">About Us</a></li>
-                <li><a href="./classes.html">Classes</a></li>
-                <li><a href="./services.html">Services</a></li>
-                <li><a href="./team.html">Our Team</a></li>
-                <li><a href="./blog.html">Article</a></li>
-                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="./index.php">Home</a></li>
+                <li><a href="./about-us.php">About Us</a></li>
+                <li><a href="./classes.php">Classes</a></li>
+                <li><a href="./services.php">Services</a></li>
+                <li><a href="./team.php">Our Team</a></li>
+                <li><a href="./blog.php">Article</a></li>
+                <li><a href="./contact.php">Contact</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -152,7 +152,7 @@ if (!isset($_SESSION['username'])) {
             <div class="row">
                 <div class="col-lg-3">
                     <div class="logo">
-                        <a href="./index.html">
+                        <a href="./index.php">
                             <img src="img/logoCelebes.png" alt="">
                         </a>
                     </div>
@@ -160,13 +160,13 @@ if (!isset($_SESSION['username'])) {
                 <div class="col-lg-6">
                     <nav class="nav-menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="./about-us.html">About Us</a></li>
-                            <li><a href="./class-details.html">Classes</a></li>
-                            <li><a href="./services.html">Services</a></li>
-                            <li><a href="./team.html">Our Team</a></li>
-                            <li><a href="./blog.html">Article</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                            <li class="active"><a href="./index.php">Home</a></li>
+                            <li><a href="./about-us.php">About Us</a></li>
+                            <li><a href="./class-details.php">Classes</a></li>
+                            <li><a href="./services.php">Services</a></li>
+                            <li><a href="./team.php">Our Team</a></li>
+                            <li><a href="./blog.php">Article</a></li>
+                            <li><a href="./contact.php">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -296,7 +296,7 @@ if (!isset($_SESSION['username'])) {
                             <div class="hi-text">
                                 <span>Shape your body</span>
                                 <h1>Be <strong>strong</strong> traning hard</h1>
-                                <a href="#" class="primary-btn">Get info</a>
+                                <a href="./about-us.php" class="primary-btn">Get info</a>
                             </div>
                         </div>
                     </div>
@@ -309,7 +309,7 @@ if (!isset($_SESSION['username'])) {
                             <div class="hi-text">
                                 <span>Shape your body</span>
                                 <h1>Be <strong>strong</strong> traning hard</h1>
-                                <a href="#" class="primary-btn">Get info</a>
+                                <a href="./about-us.php" class="primary-btn">Get info</a>
                             </div>
                         </div>
                     </div>
@@ -684,9 +684,9 @@ if (!isset($_SESSION['username'])) {
                         <div class="fa-social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa  fa-envelope-o"></i></a>
+                            <a href="https://youtu.be/FOJHzV5ERgQ?si=9oxEa6r1_nlYvDbs"><i class="fa fa-youtube-play"></i></a>
+                            <a href="https://www.instagram.com/celebes_gym/"><i class="fa fa-instagram"></i></a>
+                            <a href="mailto:celebesgym@gmail.com"><i class="fa  fa-envelope-o"></i></a>
                         </div>
                     </div>
                 </div>
@@ -694,10 +694,10 @@ if (!isset($_SESSION['username'])) {
                     <div class="fs-widget">
                         <h4>Useful links</h4>
                         <ul>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Classes</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="./about-us.php">About</a></li>
+                            <li><a href="./blog.php">Article</a></li>
+                            <li><a href="./class-details.php">Classes</a></li>
+                            <li><a href="./contact.php">Contact</a></li>
                         </ul>
                     </div>
                 </div>
@@ -705,10 +705,10 @@ if (!isset($_SESSION['username'])) {
                     <div class="fs-widget">
                         <h4>Support</h4>
                         <ul>
-                            <li><a href="#">Login</a></li>
+                            <li><a href="./login.php">Login</a></li>
+                            <li><a href="./logout.php">Logout</a></li>
                             <li><a href="#">My account</a></li>
-                            <li><a href="#">Subscribe</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="https://youtu.be/FOJHzV5ERgQ?si=9oxEa6r1_nlYvDbs">Subscribe</a></li>
                         </ul>
                     </div>
                 </div>
@@ -716,14 +716,14 @@ if (!isset($_SESSION['username'])) {
                     <div class="fs-widget">
                         <h4>Tips & Guides</h4>
                         <div class="fw-recent">
-                            <h6><a href="#">Physical fitness may help prevent depression, anxiety</a></h6>
+                            <h6><a href="./blog.php">Physical fitness may help prevent depression, anxiety</a></h6>
                             <ul>
                                 <li>3 min read</li>
                                 <li>20 Comment</li>
                             </ul>
                         </div>
                         <div class="fw-recent">
-                            <h6><a href="#">Fitness: The best exercise to lose belly fat and tone up...</a></h6>
+                            <h6><a href="./blog.php">Fitness: The best exercise to lose belly fat and tone up...</a></h6>
                             <ul>
                                 <li>3 min read</li>
                                 <li>20 Comment</li>

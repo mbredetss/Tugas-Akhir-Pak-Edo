@@ -1,3 +1,29 @@
+<?php
+include "koneksi.php";
+session_start();
+// Periksa apakah session username dan password ada
+if (isset($_SESSION['username'])) {
+    $usernames = $_SESSION['username'];
+    $passwords = $_SESSION['password'];
+    ?>
+    <script>
+        window.onload = function () {
+            document.getElementById('btnProfile').removeAttribute('hidden');
+            document.getElementById('textBase').removeAttribute('hidden');
+            document.getElementById('listOption').removeAttribute('hidden');
+            document.getElementById('signIn').setAttribute('hidden', true);
+        };
+    </script>
+    <?php
+    $sqlnama = "SELECT user.nama FROM registrasi INNER JOIN user ON user.username = registrasi.username WHERE registrasi.username = '$usernames' AND registrasi.password = '$passwords'";
+    $queryNama = mysqli_query($conn, $sqlnama);
+    if (!$queryNama) {
+        die("Query nama gagal :" . mysqli_error($conn));
+    }
+    $namaRow = mysqli_fetch_assoc($queryNama);
+    $nama = $namaRow['nama'];
+}
+?>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -41,13 +67,13 @@
         </div>
         <nav class="canvas-menu mobile-menu">
             <ul>
-                <li><a href="./index.html">Home</a></li>
-                <li><a href="./about-us.html">About Us</a></li>
-                <li><a href="./class-details.html">Classes</a></li>
-                <li><a href="./services.html">Services</a></li>
-                <li><a href="./team.html">Our Team</a></li>
-                <li><a href="./blog.html">Article</a></li>
-                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="./index.php">Home</a></li>
+                <li><a href="./about-us.php]">About Us</a></li>
+                <li><a href="./class-details.php">Classes</a></li>
+                <li><a href="./services.php">Services</a></li>
+                <li><a href="./team.php">Our Team</a></li>
+                <li><a href="./blog.php">Article</a></li>
+                <li><a href="./contact.php">Contact</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -66,7 +92,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="logo">
-                        <a href="./index.html">
+                        <a href="./index.php">
                             <img src="img/logoCelebes.png" alt="">
                         </a>
                     </div>
@@ -74,34 +100,39 @@
                 <div class="col-lg-6">
                     <nav class="nav-menu">
                         <ul>
-                            <li><a href="./index.html">Home</a></li>
-                            <li><a href="./about-us.html">About Us</a></li>
-                            <li><a href="./class-details.html">Classes</a></li>
-                            <li><a href="./services.html">Services</a></li>
-                            <li><a href="./team.html">Our Team</a></li>
-                            <li class="active"><a href="./blog.html">Article</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                            <li><a href="./index.php">Home</a></li>
+                            <li><a href="./about-us.php">About Us</a></li>
+                            <li><a href="./class-details.php">Classes</a></li>
+                            <li><a href="./services.php">Services</a></li>
+                            <li><a href="./team.php">Our Team</a></li>
+                            <li class="active"><a href="./blog.php">Article</a></li>
+                            <li><a href="./contact.php">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3">
                     <div class="top-option">
                         <div class="relative">
-                            <a href="registrasi.php" class="sign-in-btn">Sign In</a>
-                            <a id="btnProfile" class="user-profile fa fa-user">
-                            </a>
-                            <div id="listOption" hidden class="absolute end-0 z-10 mt-2 w-56 divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg"
+                            <a id="signIn" href="login.php" class="sign-in-btn">Sign In</a>
+
+                            <!-- Profile -->
+                            <a hidden id="btnProfile" class="user-profile fa fa-user"></a>
+                            <span id="textBase" hidden class="text-base font-medium text-orange-500">
+                                <?php echo $nama; ?>
+                            </span>
+                            <div hidden id="listOption"
+                                class="absolute end-0 z-10 mt-2 w-56 divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg"
                                 role="menu">
                                 <div class="p-2">
                                     <a href="#"
                                         class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm  hover:bg-orange-500"
                                         role="menuitem">
-                                          Edit profile
+                                        Edit profile
                                     </a>
                                 </div>
 
                                 <div class="p-2">
-                                    <form method="POST" action="#">
+                                    <form method="POST" action="logout.php">
                                         <button type="submit"
                                             class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
                                             role="menuitem">
@@ -110,7 +141,9 @@
                                     </form>
                                 </div>
                             </div>
+                            <!-- Profile -->
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -163,7 +196,7 @@
                             <img src="img/blog/blog-2.jpg" alt="">
                         </div>
                         <div class="bi-text">
-                            <h5><a href="./blog-details.html">Vegan White Peach Mug Cobbler With Cardam Vegan White Peach Mug
+                            <h5><a href="./blog-details.php">Vegan White Peach Mug Cobbler With Cardam Vegan White Peach Mug
                                     Cobbler...</a></h5>
                             <ul>
                                 <li>by Admin</li>
@@ -179,7 +212,7 @@
                             <img src="img/blog/blog-3.jpg" alt="">
                         </div>
                         <div class="bi-text">
-                            <h5><a href="./blog-details.html">Vegan White Peach Mug Cobbler With Cardam Vegan White Peach Mug
+                            <h5><a href="./blog-details.php">Vegan White Peach Mug Cobbler With Cardam Vegan White Peach Mug
                                     Cobbler...</a></h5>
                             <ul>
                                 <li>by Admin</li>
@@ -195,7 +228,7 @@
                             <img src="img/blog/blog-4.jpg" alt="">
                         </div>
                         <div class="bi-text">
-                            <h5><a href="./blog-details.html">Vegan White Peach Mug Cobbler With Cardam Vegan White Peach Mug
+                            <h5><a href="./blog-details.php">Vegan White Peach Mug Cobbler With Cardam Vegan White Peach Mug
                                     Cobbler...</a></h5>
                             <ul>
                                 <li>by Admin</li>
@@ -211,7 +244,7 @@
                             <img src="img/blog/blog-5.jpg" alt="">
                         </div>
                         <div class="bi-text">
-                            <h5><a href="./blog-details.html">Vegan White Peach Mug Cobbler With Cardam Vegan White Peach Mug
+                            <h5><a href="./blog-details.php">Vegan White Peach Mug Cobbler With Cardam Vegan White Peach Mug
                                     Cobbler...</a></h5>
                             <ul>
                                 <li>by Admin</li>
@@ -228,7 +261,7 @@
                         <div class="so-categories">
                             <h5 class="title">Categories</h5>
                             <ul>
-                                <li><a href="#">Yoga <span>12</span></a></li>
+                                <li><a href="./class-details.php">Yoga <span>12</span></a></li>
                                 <li><a href="#">Runing <span>32</span></a></li>
                                 <li><a href="#">Weightloss <span>86</span></a></li>
                                 <li><a href="#">Cario <span>25</span></a></li>
@@ -240,7 +273,7 @@
                             <h5 class="title">Feature posts</h5>
                             <div class="latest-large set-bg" data-setbg="img/letest-blog/latest-1.jpg">
                                 <div class="ll-text">
-                                    <h5><a href="./blog-details.html">This Japanese Way of Making Iced Coffee Is a Game...</a></h5>
+                                    <h5><a href="./blog-details.php">This Japanese Way of Making Iced Coffee Is a Game...</a></h5>
                                     <ul>
                                         <li>Aug 20, 2019</li>
                                         <li>20 Comment</li>
@@ -252,7 +285,7 @@
                                     <img src="img/letest-blog/latest-2.jpg" alt="">
                                 </div>
                                 <div class="li-text">
-                                    <h6><a href="./blog-details.html">Grilled Potato and Green Bean Salad</a></h6>
+                                    <h6><a href="./blog-details.php">Grilled Potato and Green Bean Salad</a></h6>
                                     <span class="li-time">Aug 15, 2019</span>
                                 </div>
                             </div>
@@ -261,7 +294,7 @@
                                     <img src="img/letest-blog/latest-3.jpg" alt="">
                                 </div>
                                 <div class="li-text">
-                                    <h6><a href="./blog-details.html">The $8 French Rosé I Buy in Bulk Every Summer</a></h6>
+                                    <h6><a href="./blog-details.php">The $8 French Rosé I Buy in Bulk Every Summer</a></h6>
                                     <span class="li-time">Aug 15, 2019</span>
                                 </div>
                             </div>
@@ -270,7 +303,7 @@
                                     <img src="img/letest-blog/latest-4.jpg" alt="">
                                 </div>
                                 <div class="li-text">
-                                    <h6><a href="./blog-details.html">Ina Garten's Skillet-Roasted Lemon Chicken</a></h6>
+                                    <h6><a href="./blog-details.php">Ina Garten's Skillet-Roasted Lemon Chicken</a></h6>
                                     <span class="li-time">Aug 15, 2019</span>
                                 </div>
                             </div>
@@ -279,7 +312,7 @@
                                     <img src="img/letest-blog/latest-5.jpg" alt="">
                                 </div>
                                 <div class="li-text">
-                                    <h6><a href="./blog-details.html">The Best Weeknight Baked Potatoes, 3 Creative Ways</a></h6>
+                                    <h6><a href="./blog-details.php">The Best Weeknight Baked Potatoes, 3 Creative Ways</a></h6>
                                     <span class="li-time">Aug 15, 2019</span>
                                 </div>
                             </div>
@@ -349,9 +382,9 @@
                         <div class="fa-social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa  fa-envelope-o"></i></a>
+                            <a href="https://youtu.be/FOJHzV5ERgQ?si=9oxEa6r1_nlYvDbs"><i class="fa fa-youtube-play"></i></a>
+                            <a href="https://www.instagram.com/celebes_gym/"><i class="fa fa-instagram"></i></a>
+                            <a href="mailto:celebesgym@gmail.com"><i class="fa  fa-envelope-o"></i></a>
                         </div>
                     </div>
                 </div>
@@ -359,10 +392,10 @@
                     <div class="fs-widget">
                         <h4>Useful links</h4>
                         <ul>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Classes</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="./about-us.php">About</a></li>
+                            <li><a href="./blog.php">Blog</a></li>
+                            <li><a href="./class-details.php">Classes</a></li>
+                            <li><a href="./contact.php">Contact</a></li>
                         </ul>
                     </div>
                 </div>
@@ -370,10 +403,10 @@
                     <div class="fs-widget">
                         <h4>Support</h4>
                         <ul>
-                            <li><a href="#">Login</a></li>
+                            <li><a href="./login.php">Login</a></li>
+                            <li><a href="./logout.php">Logout</a></li>
                             <li><a href="#">My account</a></li>
-                            <li><a href="#">Subscribe</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="https://youtu.be/FOJHzV5ERgQ?si=9oxEa6r1_nlYvDbs">Subscribe</a></li>
                         </ul>
                     </div>
                 </div>
@@ -381,14 +414,14 @@
                     <div class="fs-widget">
                         <h4>Tips & Guides</h4>
                         <div class="fw-recent">
-                            <h6><a href="./blog-details.html">Physical fitness may help prevent depression, anxiety</a></h6>
+                            <h6><a href="./blog-details.php">Physical fitness may help prevent depression, anxiety</a></h6>
                             <ul>
                                 <li>3 min read</li>
                                 <li>20 Comment</li>
                             </ul>
                         </div>
                         <div class="fw-recent">
-                            <h6><a href="./blog-details.html">Fitness: The best exercise to lose belly fat and tone up...</a></h6>
+                            <h6><a href="./blog-details.php">Fitness: The best exercise to lose belly fat and tone up...</a></h6>
                             <ul>
                                 <li>3 min read</li>
                                 <li>20 Comment</li>
@@ -430,6 +463,8 @@
     <script src="js/jquery.slicknav.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
 
 
 
