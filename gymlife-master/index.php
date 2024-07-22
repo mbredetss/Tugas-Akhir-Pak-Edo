@@ -37,19 +37,32 @@ if (isset($_SESSION['username'])) {
     $sqlCekMembership = "SELECT * FROM langganan WHERE username = '$usernames'";
     $queryCekMembership = mysqli_query($conn, $sqlCekMembership);
     if (mysqli_num_rows($queryCekMembership) > 0) {
+        //waktu sekarang
         $date = date('Y-m-d');
-        $sqlMasaMembership = "SELECT DATEDIFF(langganan_berakhir, $date) AS masa_membership FROM langganan WHERE username = '$usernames'";
-        $queryMasaMembership = mysqli_query($conn, $sqlMasaMembership);
-        if (!$queryMasaMembership) {
-            die("Query masa membership gagal: ". mysqli_error($conn));
+        // waktu membership
+        $sqlMembership = "SELECT ABS(DATEDIFF('$date', langganan_berakhir)) AS membership FROM langganan WHERE username = '$usernames'";
+        $queryMembership = mysqli_query($conn, $sqlMembership);
+        if (!$queryMembership) {
+            die("Query gagal membership: " . mysqli_error($conn));
         }
-        $masaMembershipRow = mysqli_fetch_assoc($queryMasaMembership);
-        $masaMembership = $masaMembershipRow['masa_membership'];
+        $masaMembershipRow = mysqli_fetch_assoc($queryMembership);
+        $masaMembership = $masaMembershipRow['membership'];
     } else {
         $masaMembership = 0;
     }
+    ?>
+    <script>
+        function confirmSubscription() {
+            var result = confirm("Apakah Anda yakin ingin melanjutkan langganan?");
+            if (result) {
+                document.getElementById('subscriptionForm').submit();
+            } else {
+                event.preventDefault();
+            }
+        }
+    </script>
+    <?php
 }
-
 //BUTTON LOGIN
 if (isset($_POST["btnLogin"])) {
     $username = $_POST["username"];
@@ -107,17 +120,18 @@ if (isset($_POST['btn3Month'])) {
             alert("SALDO ANDA TIDAK CUKUP!");
         </script>
         <?php
+        die();
     } else {
         // Inisialisasi tanggal saat ini
         $tanggalLangganan = new DateTime(); // Tanggal saat ini
         // Tambahkan 30 hari ke tanggal saat ini
-        $tanggalLangganan->modify('+30 days');
+        $tanggalLangganan->modify('+90 days');
         // Format tanggal baru
         $tanggalBerakhir = $tanggalLangganan->format('Y-m-d'); // Ubah format menjadi Y-m-d
         $date = date('Y-m-d'); // Ubah format menjadi Y-m-d
 
         //upload usernames, date, tanggal berakhir ke table langganan
-        $sqlLangganan = "INSERT INTO langganan (username, tanggal_langganan, langganan_berakhir) VALUES ('$usernames', '$tanggalBerakhir', '$date')";
+        $sqlLangganan = "INSERT INTO langganan (username, tanggal_langganan, langganan_berakhir) VALUES ('$usernames', '$date', '$tanggalBerakhir')";
         $queryLangganan = mysqli_query($conn, $sqlLangganan);
         if (!$queryLangganan) {
             die("Query langganan gagal: " . mysqli_error($conn));
@@ -127,10 +141,85 @@ if (isset($_POST['btn3Month'])) {
         $sqlUpdateSaldo = "UPDATE user SET saldo = saldo - $biaya WHERE username = $usernames";
         $queryUpdateSaldo = mysqli_query($conn, $sqlUpdateSaldo);
         if (!$queryUpdateSaldo) {
-            die("Query Update saldo gagal: ". mysqli_error($conn));
+            die("Query Update saldo gagal: " . mysqli_error($conn));
         }
         //UPDATE SALDO DI TAMPILAN
         $saldo -= $biaya;
+        header("Location: index.php");
+    }
+}
+
+if (isset($_POST['btn6Month'])) {
+    $biaya = 600000;
+    if ($biaya >= $saldo) {
+        ?>
+        <script>
+            alert("SALDO ANDA TIDAK CUKUP!");
+        </script>
+        <?php
+        die();
+    } else {
+        // Inisialisasi tanggal saat ini
+        $tanggalLangganan = new DateTime(); // Tanggal saat ini
+        // Tambahkan 30 hari ke tanggal saat ini
+        $tanggalLangganan->modify('+180 days');
+        // Format tanggal baru
+        $tanggalBerakhir = $tanggalLangganan->format('Y-m-d'); // Ubah format menjadi Y-m-d
+        $date = date('Y-m-d'); // Ubah format menjadi Y-m-d
+
+        //upload usernames, date, tanggal berakhir ke table langganan
+        $sqlLangganan = "INSERT INTO langganan (username, tanggal_langganan, langganan_berakhir) VALUES ('$usernames', '$date', '$tanggalBerakhir')";
+        $queryLangganan = mysqli_query($conn, $sqlLangganan);
+        if (!$queryLangganan) {
+            die("Query langganan gagal: " . mysqli_error($conn));
+        }
+
+        //UPDATE SALDO DI DATABASE
+        $sqlUpdateSaldo = "UPDATE user SET saldo = saldo - $biaya WHERE username = $usernames";
+        $queryUpdateSaldo = mysqli_query($conn, $sqlUpdateSaldo);
+        if (!$queryUpdateSaldo) {
+            die("Query Update saldo gagal: " . mysqli_error($conn));
+        }
+        //UPDATE SALDO DI TAMPILAN
+        $saldo -= $biaya;
+        header("Location: index.php");
+    }
+}
+
+if (isset($_POST['btn1Year'])) {
+    $biaya = 1150000;
+    if ($biaya >= $saldo) {
+        ?>
+        <script>
+            alert("SALDO ANDA TIDAK CUKUP!");
+        </script>
+        <?php
+        die();
+    } else {
+        // Inisialisasi tanggal saat ini
+        $tanggalLangganan = new DateTime(); // Tanggal saat ini
+        // Tambahkan 30 hari ke tanggal saat ini
+        $tanggalLangganan->modify('+365 days');
+        // Format tanggal baru
+        $tanggalBerakhir = $tanggalLangganan->format('Y-m-d'); // Ubah format menjadi Y-m-d
+        $date = date('Y-m-d'); // Ubah format menjadi Y-m-d
+
+        //upload usernames, date, tanggal berakhir ke table langganan
+        $sqlLangganan = "INSERT INTO langganan (username, tanggal_langganan, langganan_berakhir) VALUES ('$usernames', '$date', '$tanggalBerakhir')";
+        $queryLangganan = mysqli_query($conn, $sqlLangganan);
+        if (!$queryLangganan) {
+            die("Query langganan gagal: " . mysqli_error($conn));
+        }
+
+        //UPDATE SALDO DI DATABASE
+        $sqlUpdateSaldo = "UPDATE user SET saldo = saldo - $biaya WHERE username = $usernames";
+        $queryUpdateSaldo = mysqli_query($conn, $sqlUpdateSaldo);
+        if (!$queryUpdateSaldo) {
+            die("Query Update saldo gagal: " . mysqli_error($conn));
+        }
+        //UPDATE SALDO DI TAMPILAN
+        $saldo -= $biaya;
+        header("Location: index.php");
     }
 }
 ?>
@@ -159,16 +248,6 @@ if (isset($_POST['btn3Month'])) {
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
 
-    <script>
-        function confirmSubscription() {
-            var result = confirm("Apakah Anda yakin ingin melanjutkan langganan?");
-            if (result) {
-                document.getElementById('subscriptionForm').submit();
-            } else {
-                event.preventDefault();
-            }
-        }
-    </script>
 </head>
 
 <body>
@@ -328,7 +407,7 @@ if (isset($_POST['btn3Month'])) {
                                 <div class="p-2">
                                     <p class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm "
                                         role="menuitem">
-                                        Masa Membership : <?php echo $masaMembership; ?>
+                                        Masa aktif: <?php echo +$masaMembership; ?> hari
                                     </p>
                                 </div>
 
@@ -577,7 +656,7 @@ if (isset($_POST['btn3Month'])) {
                                 <li>Monthly membership</li>
                                 <li>No time restrictions</li>
                             </ul>
-                            <button class="btnLangganan" name="btn6Month">
+                            <button onclick="confirmSubscription()" class="btnLangganan" name="btn6Month">
                                 <a class="primary-btn pricing-btn">Enroll now</a>
                             </button>
                         </div>
@@ -599,7 +678,7 @@ if (isset($_POST['btn3Month'])) {
                                 <li>Access to exclusive events</li>
                                 <li>Free nutritional guidance</li>
                             </ul>
-                            <button class="btnLangganan" name="btn1Year">
+                            <button onclick="confirmSubscription()" class="btnLangganan" name="btn1Year">
                                 <a class="primary-btn pricing-btn">Enroll now</a>
                             </button>
                         </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 22 Jul 2024 pada 15.15
+-- Waktu pembuatan: 22 Jul 2024 pada 18.55
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.0.30
 
@@ -60,6 +60,13 @@ CREATE TABLE `langganan` (
   `langganan_berakhir` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data untuk tabel `langganan`
+--
+
+INSERT INTO `langganan` (`username`, `tanggal_langganan`, `langganan_berakhir`) VALUES
+(123, '2024-08-21', '2024-07-22');
+
 -- --------------------------------------------------------
 
 --
@@ -103,7 +110,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`no`, `nama`, `alamat`, `tanggal_lahir`, `saldo`, `username`, `password`) VALUES
-(19, '123', 'dasdsa', '2024-07-21', 420000, '123', '123'),
+(19, '123', 'dasdsa', '2024-07-21', 450000, '123', '123'),
 (20, 'fsdf', 'sdfsdf', '2024-07-21', 0, '1234', '123'),
 (22, 'asdasd', 'asdasdasd', '2024-07-21', 0, 'asdasd', '123');
 
