@@ -256,7 +256,7 @@ if (isset($_SESSION['username'])) {
                                 <div class="comment-option">
                                     <h5 class="co-title">Comment</h5>
                                     <?php
-                                $sql_select = "SELECT nama, comment FROM komen ORDER BY id";
+                                $sql_select = "SELECT nama, comment FROM komen ORDER BY id LIMIT 4";
                                 $result_select = $conn->query($sql_select);
                                 if ($result_select->num_rows === 0)
                                 {
