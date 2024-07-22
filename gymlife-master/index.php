@@ -2,27 +2,6 @@
 include "koneksi.php";
 session_start();
 
-//function langganan
-function langganan() {
-    ?>
-        <script>
-            window.onload = function () {
-                const btnLangganan = document.querySelectorAll('.btnLangganan');
-                btnLangganan.forEach(function (button) {
-                    button.setAttribute('data-modal-target', 'popup-modal');
-                    button.setAttribute('data-modal-toggle', 'popup-modal');
-                });
-                document.querySelectorAll('.btnLangganan').forEach(button => {
-                    button.addEventListener('click', function (e) {
-                        e.preventDefault(); // Mencegah aksi default yang mungkin menyebabkan reload
-                        // Lakukan aksi lain
-                    });
-                });
-            }
-        </script>
-    <?php
-}
-
 // Periksa apakah session username dan password ada
 if (isset($_SESSION['username'])) {
     $usernames = $_SESSION['username'];
@@ -82,7 +61,7 @@ if (isset($_POST["btnLogin"])) {
         }
     }
 }
-//LANGGANAN 3MONTH
+//Jika user belum melakukan login maka akan di arahkan login terlebih dahulu
 if (!isset($_SESSION['username'])) {
     ?>
     <script>
@@ -101,13 +80,26 @@ if (!isset($_SESSION['username'])) {
         }
     </script>
     <?php
-    
-} else if (isset($_SESSION['username'])) {
-    if (isset($_POST['btn3Month'])) {
-        langganan();
-        
+}
+
+if (isset($_POST['btn3Month'])) {
+    // Inisialisasi tanggal saat ini
+    $tanggalLangganan = new DateTime(); // Tanggal saat ini
+    // Tambahkan 30 hari ke tanggal saat ini
+    $tanggalLangganan->modify('+30 days');
+    // Format tanggal baru
+    $tanggalBerakhir = $tanggalLangganan->format('d/m/Y');
+    $date = date('d/m/Y');
+
+    //upload usernames, date, tanggal berakhir ke table langganan
+    $sqlLangganan = "INSERT INTO langganan VALUES($usernames, $date, $tanggalBerakhir)";
+    $queryLangganan = mysqli_query($conn, $sqlLangganan);
+    if (!$queryLangganan) {
+        die("Query langganan gagal: " . mysqli_error($conn));
     }
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -136,6 +128,8 @@ if (!isset($_SESSION['username'])) {
 </head>
 
 <body>
+    <?php
+    ?>
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -202,7 +196,6 @@ if (!isset($_SESSION['username'])) {
                                 type="button">
                                 <a id="signIn" class="sign-in-btn">Sign In</a>
                             </button>
-
                             <!-- Main modal -->
                             <div id="authentication-modal" tabindex="-1" aria-hidden="true"
                                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -261,43 +254,6 @@ if (!isset($_SESSION['username'])) {
                                                         account</a>
                                                 </div>
                                             </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="popup-modal" tabindex="-1"
-                                class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                <div class="relative p-4 w-full max-w-md max-h-full">
-                                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                        <button type="button"
-                                            class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                            data-modal-hide="popup-modal">
-                                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                fill="none" viewBox="0 0 14 14">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                            </svg>
-                                            <span class="sr-only">Close modal</span>
-                                        </button>
-                                        <div class="p-4 md:p-5 text-center">
-                                            <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
-                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 20 20">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                            </svg>
-                                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                                                Apakah Anda yakin untuk berlangganan?</h3>
-                                            <button data-modal-hide="popup-modal" type="button"
-                                                class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
-                                                Ya
-                                            </button>
-                                            <button data-modal-hide="popup-modal" type="button"
-                                                class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                                                Tidak</button>
                                         </div>
                                     </div>
                                 </div>
@@ -533,72 +489,72 @@ if (!isset($_SESSION['username'])) {
                     </div>
                 </div>
             </div>
-            <form id="myForm" method="post">
-                <div class="row justify-content-center">
-                    <div class="col-lg-4 col-md-8">
-                        <div class="ps-item">
-                            <h3>3 Month unlimited</h3>
-                            <div class="pi-price">
-                                <h2>Rp. 350.000</h2>
-                                <span>SINGLE CLASS</span>
-                            </div>
-                            <ul>
-                                <li>Free riding</li>
-                                <li>Limited equipments</li>
-                                <li>Group trainer</li>
-                                <li>Weight loss classes</li>
-                                <li>Monthly membership</li>
-                                <li>Time restrictions apply</li>
-                            </ul>
-                            <button class="btnLangganan" name="btn3Month">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-8">
+                    <div class="ps-item">
+                        <h3>3 Month unlimited</h3>
+                        <div class="pi-price">
+                            <h2>Rp. 350.000</h2>
+                            <span>SINGLE CLASS</span>
+                        </div>
+                        <ul>
+                            <li>Free riding</li>
+                            <li>Limited equipments</li>
+                            <li>Group trainer</li>
+                            <li>Weight loss classes</li>
+                            <li>Monthly membership</li>
+                            <li>Time restrictions apply</li>
+                        </ul>
+                        <form method="post">
+                            <button type="submit" class="btnLangganan" name="btn3Month">
                                 <a href="" class="primary-btn pricing-btn">Enroll now</a>
                             </button>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-8">
-                        <div class="ps-item">
-                            <h3>6 Month unlimited</h3>
-                            <div class="pi-price">
-                                <h2>Rp. 600.000</h2>
-                                <span>DOUBLE CLASS</span>
-                            </div>
-                            <ul>
-                                <li>Free riding</li>
-                                <li>Unlimited equipments</li>
-                                <li>Personal trainer</li>
-                                <li>Weight loss classes</li>
-                                <li>Monthly membership</li>
-                                <li>No time restrictions</li>
-                            </ul>
-                            <button class="btnLangganan" name="btn6Month">
-                                <a class="primary-btn pricing-btn">Enroll now</a>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-8">
-                        <div class="ps-item">
-                            <h3>1 Year unlimited</h3>
-                            <div class="pi-price">
-                                <h2>Rp. 1.150.000</h2>
-                                <span>SPECIAL CLASS</span>
-                            </div>
-                            <ul>
-                                <li>Free riding</li>
-                                <li>Unlimited premium equipments</li>
-                                <li>Personal elite trainer</li>
-                                <li>Weight loss & muscle gain classes</li>
-                                <li>Yearly membership</li>
-                                <li>No time restrictions</li>
-                                <li>Access to exclusive events</li>
-                                <li>Free nutritional guidance</li>
-                            </ul>
-                            <button class="btnLangganan" name="btn1Year">
-                                <a href="" class="primary-btn pricing-btn">Enroll now</a>
-                            </button>
-                        </div>
+                        </form>
                     </div>
                 </div>
-            </form>
+                <div class="col-lg-4 col-md-8">
+                    <div class="ps-item">
+                        <h3>6 Month unlimited</h3>
+                        <div class="pi-price">
+                            <h2>Rp. 600.000</h2>
+                            <span>DOUBLE CLASS</span>
+                        </div>
+                        <ul>
+                            <li>Free riding</li>
+                            <li>Unlimited equipments</li>
+                            <li>Personal trainer</li>
+                            <li>Weight loss classes</li>
+                            <li>Monthly membership</li>
+                            <li>No time restrictions</li>
+                        </ul>
+                        <button class="btnLangganan" name="btn6Month">
+                            <a href="#" class="primary-btn pricing-btn">Enroll now</a>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-8">
+                    <div class="ps-item">
+                        <h3>1 Year unlimited</h3>
+                        <div class="pi-price">
+                            <h2>Rp. 1.150.000</h2>
+                            <span>SPECIAL CLASS</span>
+                        </div>
+                        <ul>
+                            <li>Free riding</li>
+                            <li>Unlimited premium equipments</li>
+                            <li>Personal elite trainer</li>
+                            <li>Weight loss & muscle gain classes</li>
+                            <li>Yearly membership</li>
+                            <li>No time restrictions</li>
+                            <li>Access to exclusive events</li>
+                            <li>Free nutritional guidance</li>
+                        </ul>
+                        <button class="btnLangganan" name="btn1Year">
+                            <a href="" class="primary-btn pricing-btn">Enroll now</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     <!-- Pricing Section End -->
