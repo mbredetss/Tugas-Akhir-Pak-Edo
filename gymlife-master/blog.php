@@ -241,7 +241,7 @@ if (isset($_SESSION['username'])) {
                     <div class="breadcrumb-text">
                         <h2>Our Article</h2>
                         <div class="bt-option">
-                            <a href="./index.html">Home</a>
+                            <a href="./index.php">Home</a>
                             <span>Article</span>
                         </div>
                     </div>
