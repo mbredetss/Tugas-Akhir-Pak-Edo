@@ -336,7 +336,7 @@ if (isset($_POST["btnLogin"])) {
                                 <a href="#">Body buiding</a>
                                 <a href="#">Yoga</a>
                                 <a href="#">Weightloss</a>
-                                <a href="#">Streching</a>
+                                <a href="#">Body Building</a>
                             </div>
                             <div class="share">
                                 <span>Share</span>
@@ -350,10 +350,9 @@ if (isset($_POST["btnLogin"])) {
                                 <img src="img/blog/details/blog-profile.jpg" alt="">
                             </div>
                             <div class="ba-text">
-                                <h5>Lena Mollein.</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation.</p>
+                                <h5>Lena Sabrina.</h5>
+                                <p>Welcome to my blog! Here, I will share experiences, knowledge and tips about the world of fitness, nutrition 
+                                    and a healthy lifestyle.</p>
                                 <div class="bp-social">
                                     <a href="#"><i class="fa fa-facebook"></i></a>
                                     <a href="#"><i class="fa fa-twitter"></i></a>
@@ -440,7 +439,8 @@ if (isset($_POST["btnLogin"])) {
                 <div class="col-lg-4">
                     <div class="gt-text">
                         <i class="fa fa-map-marker"></i>
-                        <p>333 Middle Winchendon Rd, Rindge,<br /> NH 03461</p>
+                        <p>Jl. Abdullah Daeng Sirua No.84, Masale, Kec. Panakkukang, Kota Makassar, Sulawesi
+                        Selatan,<br /> 90231</p>
                     </div>
                 </div>
                 <div class="col-lg-4">
