@@ -6,6 +6,31 @@ if (isset($_SESSION['username'])) {
     $usernames = $_SESSION['username'];
     $passwords = $_SESSION['password'];
     ?>
+
+                            <?php
+                            if (isset($_POST['submit'])) {
+                                if (isset($_SESSION['username'])) {
+                                    $nama = $_POST['nama'];
+                                    $email = $_POST['email'];
+                                    $comment = $_POST['comment'];
+                                    $sql = "INSERT INTO komen VALUES ('','$nama', '$email', '$comment')";
+                                    $conn->query($sql) === TRUE;
+                                } else {
+                                    
+                                    echo "<script>alert('Silahkan login terlebih dahulu');</script>";
+                                }
+                            }
+
+                            if (isset($_POST['delete_comment'])) {
+                                $id = $_POST['comment_id'];
+                                $sql_delete = "DELETE FROM komen WHERE id = $id";
+                                $conn->query($sql_delete);
+                            }
+                            
+                        
+                            ?>
+
+
     <script>
         window.onload = function () {
             document.getElementById('btnProfile').removeAttribute('hidden');
@@ -13,6 +38,7 @@ if (isset($_SESSION['username'])) {
             document.getElementById('signIn').setAttribute('hidden', true);
         };
     </script>
+    
     <?php
     $sqlnama = "SELECT user.nama FROM registrasi INNER JOIN user ON user.username = registrasi.username WHERE registrasi.username = '$usernames' AND registrasi.password = '$passwords'";
     $queryNama = mysqli_query($conn, $sqlnama);
@@ -30,6 +56,7 @@ if (isset($_SESSION['username'])) {
 
     $saldoRow = mysqli_fetch_assoc($querySaldo);
     $saldo = $saldoRow['saldo'];
+    
 }
 
 //BUTTON LOGIN
@@ -85,6 +112,11 @@ if (isset($_POST["btnLogin"])) {
     <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <style>
+        .red-heart {
+    color: red;
+}
+    </style>
 </head>
 
 <body>
@@ -374,57 +406,48 @@ if (isset($_POST["btnLogin"])) {
                                     </form>
                                 </div>
                             </div>
-                            <?php
-                            if (isset($_POST['submit'])) {
-                                if (isset($_SESSION['username'])) {
-                                    $nama = $_POST['nama'];
-                                    $email = $_POST['email'];
-                                    $comment = $_POST['comment'];
-                                    $sql = "INSERT INTO komen VALUES ('','$nama', '$email', '$comment')";
-                                    $conn->query($sql) === TRUE;
-                                } else {
-                                    ?>
-                                    <script>
-                                        alert("Silahkan login terlebih dahulu");
-                                    </script>
-                                    <?php
-                                }
-                            }
-                            ?>
-
                             
 
-                            <div class="col-lg-6">
-                                <div class="comment-option">
-                                    <h5 class="co-title">Comment</h5>
-                                    <?php
-                                    $sql_select = "SELECT nama, comment FROM komen ORDER BY id limit 4";
-                                    $result_select = $conn->query($sql_select);
-                                    if ($result_select->num_rows === 0) {
-                                        ?>
-                                        <?php
-                                    } else {
-                                        while ($komen = $result_select->fetch_assoc()) {
-                                            ?>
-                                            <div class="co-item">
-                                                <div class="co-widget">
-                                                    <a href="#"><i class="fa fa-heart-o"></i></a>
-                                                    <a href="#"><i class="fa fa-share-square-o"></i></a>
-                                                </div>
-                                                <div class="co-pic">
-                                                    <img src="img/blog/details/comment-1.jpg" alt="">
-                                                    <h5><?= $komen['nama'] ?></h5>
-                                                </div>
-                                                <div class="co-text">
-                                                    <p><?= $komen['comment'] ?></p>
-                                                </div>
-                                            </div>
-                                            <?php
-                                        }
-                                    }
-                                    ?>
-                                </div>
-                            </div>
+    <div class="col-lg-6">
+        <div class="comment-option">
+            <h5 class="co-title">Comment</h5>
+            <?php
+            $sql_select = "SELECT id, nama, comment FROM komen ORDER BY id limit 4";
+            $result_select = $conn->query($sql_select);
+            if ($result_select->num_rows > 0) {
+                while ($komen = $result_select->fetch_assoc()) {
+                    ?>
+                    <div class="co-item">
+                        <div class="co-widget">
+                        <a href="#" id="heart-icon"><i class="fa fa-heart-o" style="font-size: 18px;"></i></a>
+                        <script>
+        document.getElementById('heart-icon').addEventListener('click', function(event) {
+            event.preventDefault();
+            this.querySelector('i').classList.toggle('red-heart');
+        });
+    </script>                           
+                            <form action="blog-details.php" method="post" style="display:inline;">
+                                <input type="hidden" name="comment_id" value="<?= $komen['id'] ?>">
+                                <button type="submit" name="delete_comment" style="background:none; border:none; padding:0; margin:0; cursor:pointer;">
+                                    <i class="fa fa-trash" style="color: grey; font-size: 20px;"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="co-pic">
+                            <img src="img/blog/details/comment-1.jpg" alt="">
+                            <h5><?= $komen['nama'] ?></h5>
+                        </div>
+                        <div class="co-text">
+                            <p><?= $komen['comment'] ?></p>
+                        </div>
+                    </div>
+                    <?php
+                }
+            } else {
+                echo "<p>No comments yet.</p>";
+            }
+            ?>
+        </div>
 
                         </div>
                     </div>
@@ -558,7 +581,6 @@ if (isset($_POST["btnLogin"])) {
     <script src="js/script.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
-
 
 </body>
 

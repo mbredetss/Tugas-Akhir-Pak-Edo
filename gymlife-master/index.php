@@ -190,13 +190,13 @@ if (isset($_POST['btn3Month'])) {
         </div>
         <nav class="canvas-menu mobile-menu">
             <ul>
-                <li><a href="./index.html">Home</a></li>
-                <li><a href="./about-us.html">About Us</a></li>
-                <li><a href="./classes.html">Classes</a></li>
-                <li><a href="./services.html">Services</a></li>
-                <li><a href="./team.html">Our Team</a></li>
-                <li><a href="./blog.html">Article</a></li>
-                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="./index.php">Home</a></li>
+                <li><a href="./about-us.php">About Us</a></li>
+                <li><a href="./classes.php">Classes</a></li>
+                <li><a href="./services.php">Services</a></li>
+                <li><a href="./team.php">Our Team</a></li>
+                <li><a href="./blog.php">Article</a></li>
+                <li><a href="./contact.php">Contact</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -215,7 +215,7 @@ if (isset($_POST['btn3Month'])) {
             <div class="row">
                 <div class="col-lg-3">
                     <div class="logo">
-                        <a href="./index.html">
+                        <a href="./index.php">
                             <img src="img/logoCelebes.png" alt="">
                         </a>
                     </div>
@@ -223,13 +223,13 @@ if (isset($_POST['btn3Month'])) {
                 <div class="col-lg-6">
                     <nav class="nav-menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="./about-us.html">About Us</a></li>
-                            <li><a href="./class-details.html">Classes</a></li>
-                            <li><a href="./services.html">Services</a></li>
-                            <li><a href="./team.html">Our Team</a></li>
-                            <li><a href="./blog.html">Article</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                            <li class="active"><a href="./index.php">Home</a></li>
+                            <li><a href="./about-us.php">About Us</a></li>
+                            <li><a href="./class-details.php">Classes</a></li>
+                            <li><a href="./services.php">Services</a></li>
+                            <li><a href="./team.php">Our Team</a></li>
+                            <li><a href="./blog.php">Article</a></li>
+                            <li><a href="./contact.php">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
