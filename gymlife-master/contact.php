@@ -208,7 +208,7 @@ if (isset($_SESSION['username'])) {
                         <form method="post">
                             <input type="text" placeholder="Name" name="nama">
                             <input type="email" placeholder="Email" name="email">
-                            <textarea placeholder="Any Question?" name="comment"></textarea>
+                            <textarea placeholder="Any Question?" name="pertanyaan"></textarea>
                             <div id="alert" hidden
                                 class="bg-red-light-6 inline-flex rounded-lg px-[18px] py-4 shadow-[0px_2px_10px_0px_rgba(0,0,0,0.08)]">
                                 <p class="flex items-center text-sm font-medium text-[#BC1C21]">
@@ -394,7 +394,7 @@ include "koneksi.php";
 if (isset($_POST['btnsubmit'])) {
     $nama = $_POST['nama'];
     $email = $_POST['email'];
-    $komentar = $_POST['comment'];
+    $pertanyaan = $_POST['pertanyaan'];
      // Atur zona waktu default menjadi WITA (Opsional)
      date_default_timezone_set('Asia/Makassar');
 
