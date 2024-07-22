@@ -112,6 +112,11 @@ if (isset($_POST["btnLogin"])) {
     <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <style>
+        .red-heart {
+    color: red;
+}
+    </style>
 </head>
 
 <body>
@@ -414,7 +419,13 @@ if (isset($_POST["btnLogin"])) {
                     ?>
                     <div class="co-item">
                         <div class="co-widget">
-                            <a href="#"><i class="fa fa-heart-o" style="font-size: 18px;"></i></a>
+                        <a href="#" id="heart-icon"><i class="fa fa-heart-o" style="font-size: 18px;"></i></a>
+                        <script>
+        document.getElementById('heart-icon').addEventListener('click', function(event) {
+            event.preventDefault();
+            this.querySelector('i').classList.toggle('red-heart');
+        });
+    </script>                           
                             <form action="blog-details.php" method="post" style="display:inline;">
                                 <input type="hidden" name="comment_id" value="<?= $komen['id'] ?>">
                                 <button type="submit" name="delete_comment" style="background:none; border:none; padding:0; margin:0; cursor:pointer;">
