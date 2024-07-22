@@ -306,7 +306,6 @@ if (isset($_SESSION['username'])) {
                                 <div class="comment-option">
                                     <h5 class="co-title">Comment</h5>
                                     <?php
-<<<<<<< HEAD
                                     $sql_select = "SELECT nama, comment FROM komen ORDER BY id";
                                     $result_select = $conn->query($sql_select);
                                     if ($result_select->num_rows === 0) {
@@ -332,37 +331,6 @@ if (isset($_SESSION['username'])) {
                                         }
                                     }
                                     ?>
-=======
-                                $sql_select = "SELECT nama, comment FROM komen ORDER BY id LIMIT 4";
-                                $result_select = $conn->query($sql_select);
-                                if ($result_select->num_rows === 0)
-                                {
-                                ?>
-                                <?php
-                                }
-                                else
-                                {
-                                while ($komen = $result_select->fetch_assoc())
-                                {
-                                ?>
-                                    <div class="co-item">
-                                        <div class="co-widget">
-                                            <a href="#"><i class="fa fa-heart-o"></i></a>
-                                            <a href="#"><i class="fa fa-share-square-o"></i></a>
-                                        </div>
-                                        <div class="co-pic">
-                                            <img src="img/blog/details/comment-1.jpg" alt="">
-                                            <h5><?=$komen['nama']?></h5>
-                                        </div>
-                                        <div class="co-text">
-                                            <p><?=$komen['comment']?></p>
-                                        </div>                             
-                                    </div>
-                                    <?php
-                            }
-                            }
-                            ?>          
->>>>>>> 815473c6f17b140c260ae6d82d88c831dec8c6c3
                                 </div>
                             </div>
 
@@ -381,12 +349,7 @@ if (isset($_SESSION['username'])) {
                 <div class="col-lg-4">
                     <div class="gt-text">
                         <i class="fa fa-map-marker"></i>
-<<<<<<< HEAD
                         <p>333 Middle Winchendon Rd, Rindge,<br /> NH 03461</p>
-=======
-                        <p>Jl. Abdullah Daeng Sirua No.84, Masale, Kec. Panakkukang, Kota Makassar, Sulawesi
-                        Selatan,<br/> 90231</p>
->>>>>>> 815473c6f17b140c260ae6d82d88c831dec8c6c3
                     </div>
                 </div>
                 <div class="col-lg-4">
