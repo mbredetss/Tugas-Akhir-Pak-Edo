@@ -287,7 +287,11 @@ if (isset($_SESSION['username'])) {
                                     $conn->query($sql) === TRUE;
                                 }
                                 else {
-                                    echo "hi";
+                                    ?>
+                                    <script>
+                                        alert("Silahkan login terlebih dahulu");
+                                    </script>
+                                    <?php
                                 }
                             }
                             ?>
