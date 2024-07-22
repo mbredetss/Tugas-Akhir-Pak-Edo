@@ -107,21 +107,14 @@ if (isset($_SESSION['username'])) {
                             <li><a href="./team.php">Our Team</a></li>
                             <li class="active"><a href="./blog.php">Article</a>
                                 <ul class="dropdown">
-<<<<<<< HEAD
                                     <li><a href="./blog.html">Back to Article</a></li>
                                 </ul>
                             </li>
                             <li><a href="./contact.html">Contact</a></li>
-=======
-                                    <li><a href="./blog.php">Back to Article</a></li>
-                                </ul></li>
-                            <li><a href="./contact.php">Contact</a></li>
->>>>>>> 815473c6f17b140c260ae6d82d88c831dec8c6c3
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3">
-<<<<<<< HEAD
                     <div class="top-option">
                         <div class="relative">
                             <a href="registrasi.php" class="sign-in-btn">Sign In</a>
@@ -150,9 +143,6 @@ if (isset($_SESSION['username'])) {
                             </div>
                         </div>
                     </div>
-=======
-                    
->>>>>>> 815473c6f17b140c260ae6d82d88c831dec8c6c3
                 </div>
             </div>
             <div class="canvas-open">
