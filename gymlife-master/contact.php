@@ -46,17 +46,7 @@
                 <li><a href="./class-details.html">Classes</a></li>
                 <li><a href="./services.html">Services</a></li>
                 <li><a href="./team.html">Our Team</a></li>
-                <li><a href="#">Pages</a>
-                    <ul class="dropdown">
-                        <li><a href="./about-us.html">About us</a></li>
-                        <li><a href="./class-timetable.html">Classes timetable</a></li>
-                        <li><a href="./bmi-calculator.html">Bmi calculate</a></li>
-                        <li><a href="./team.html">Our team</a></li>
-                        <li><a href="./gallery.html">Gallery</a></li>
-                        <li><a href="./blog.html">Our blog</a></li>
-                        <li><a href="./404.html">404</a></li>
-                    </ul>
-                </li>
+                <li><a href="./blog.html">Article</a></li>
                 <li><a href="./contact.html">Contact</a></li>
             </ul>
         </nav>
@@ -85,6 +75,11 @@
                     <nav class="nav-menu">
                         <ul>
                             <li><a href="./index.html">Home</a></li>
+                            <li><a href="./about-us.html">About Us</a></li>
+                            <li><a href="./class-details.html">Classes</a></li>
+                            <li><a href="./services.html">Services</a></li>
+                            <li><a href="./team.html">Our Team</a></li>
+                            <li><a href="./blog.html">Article</a></li>
                             <li class="active"><a href="./contact.html">Contact</a></li>
                         </ul>
                     </nav>
@@ -140,7 +135,8 @@
                         <div class="cw-text">
                             <i class="fa fa-mobile"></i>
                             <ul>
-                                <li>0822-1677-3773</li>
+                                <li>(0411) 123-4567</li>
+                                <li>+62 812-3456-7890</li>
                             </ul>
                         </div>
                     </div>
@@ -209,6 +205,12 @@
                         </ul>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="gt-text email">
+                        <i class="fa fa-envelope"></i>
+                        <p>celebesgym@gmail.com</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -221,16 +223,20 @@
                 <div class="col-lg-4">
                     <div class="fs-about">
                         <div class="fa-logo">
-                            <a href="#"><img src="img/logo.png" alt=""></a>
+                            <a href="#"><img src="img/logoCelebes.png" alt=""></a>
                         </div>
-                        <p>Selamat Datang di Gym Celebes!
-                            <br>
-                            Apakah Anda siap untuk mengubah hidup Anda menjadi lebih sehat, lebih kuat, dan lebih bugar?
-                            Di Gym Celebes, kami berkomitmen untuk membantu Anda mencapai tujuan kebugaran Anda dengan
-                            fasilitas terbaik dan tim profesional yang siap membimbing Anda setiap langkahnya.
+                        <p>
+                            Celebes Gym is a fitness center that provides modern facilities and professional services to
+                            help you achieve your health and fitness goals.
+                            With a variety of specially designed classes and programs, we are committed to providing the
+                            best fitness experience for all our members.
                         </p>
                         <div class="fa-social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
                             <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa  fa-envelope-o"></i></a>
                         </div>
                     </div>
                 </div>
