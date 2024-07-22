@@ -234,56 +234,9 @@ include "koneksi.php";
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <div class="comment-option">
-                                    <h5 class="co-title">Comment</h5>
-                                    <div class="co-item">
-                                        <div class="co-widget">
-                                            <a href="#"><i class="fa fa-heart-o"></i></a>
-                                            <a href="#"><i class="fa fa-share-square-o"></i></a>
-                                        </div>
-                                        <div class="co-pic">
-                                            <img src="img/blog/details/comment-1.jpg" alt="">
-                                            <h5>Brandon Kelley</h5>
-                                        </div>
-                                        <div class="co-text">
-                                            <p>Neque porro quisquam est, qui dolorem ipsum dolor sit amet, consectetur,
-                                                adipisci velit dolore.</p>
-                                        </div>
-                                    </div>
-                                    <div class="co-item reply-comment">
-                                        <div class="co-widget">
-                                            <a href="#"><i class="fa fa-heart-o"></i></a>
-                                            <a href="#"><i class="fa fa-share-square-o"></i></a>
-                                        </div>
-                                        <div class="co-pic">
-                                            <img src="img/blog/details/comment-2.jpg" alt="">
-                                            <h5>Brandon Kelley</h5>
-                                        </div>
-                                        <div class="co-text">
-                                            <p>Neque porro quisquam est, qui dolorem ipsum dolor sit amet, consectetur,
-                                                adipisci velit dolore.</p>
-                                        </div>
-                                    </div>
-                                    <div class="co-item">
-                                        <div class="co-widget">
-                                            <a href="#"><i class="fa fa-heart-o"></i></a>
-                                            <a href="#"><i class="fa fa-share-square-o"></i></a>
-                                        </div>
-                                        <div class="co-pic">
-                                            <img src="img/blog/details/comment-3.jpg" alt="">
-                                            <h5>Brandon Kelley</h5>
-                                        </div>
-                                        <div class="co-text">
-                                            <p>Neque porro quisquam est, qui dolorem ipsum dolor sit amet, consectetur,
-                                                adipisci velit dolore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
                                 <div class="leave-comment">
                                     <h5>Leave a comment</h5>
-                                    <form action="#" method="post">
+                                    <form action="blog-details.php" method="post">
                                         <input name="nama" type="text" placeholder="Name">
                                         <input name="email" type="text" placeholder="Email">
                                         <textarea name="comment" placeholder="Comment"></textarea>
@@ -291,6 +244,53 @@ include "koneksi.php";
                                     </form>
                                 </div>
                             </div>
+                            <?php
+                            if (isset($_POST['submit']))
+                            {
+                            $nama = $_POST['nama'];
+                            $email = $_POST['email'];
+                            $comment = $_POST['comment'];
+                            $sql = "INSERT INTO komen VALUES ('','$nama', '$email', '$comment')";
+                            $conn->query($sql) === TRUE;
+                            }
+                            ?>
+
+                            <div class="col-lg-6">
+                                <div class="comment-option">
+                                    <h5 class="co-title">Comment</h5>
+                                    <?php
+                                $sql_select = "SELECT nama, comment FROM komen ORDER BY id";
+                                $result_select = $conn->query($sql_select);
+                                if ($result_select->num_rows === 0)
+                                {
+                                ?>
+                                <?php
+                                }
+                                else
+                                {
+                                while ($komen = $result_select->fetch_assoc())
+                                {
+                                ?>
+                                    <div class="co-item">
+                                        <div class="co-widget">
+                                            <a href="#"><i class="fa fa-heart-o"></i></a>
+                                            <a href="#"><i class="fa fa-share-square-o"></i></a>
+                                        </div>
+                                        <div class="co-pic">
+                                            <img src="img/blog/details/comment-1.jpg" alt="">
+                                            <h5><?=$komen['nama']?></h5>
+                                        </div>
+                                        <div class="co-text">
+                                            <p><?=$komen['comment']?></p>
+                                        </div>                             
+                                    </div>
+                                    <?php
+                            }
+                            }
+                            ?>          
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -417,30 +417,4 @@ include "koneksi.php";
 
 
 </body>
-
 </html>
-<?php
-if (isset($_POST['submit']))
-{
-$nama = $_POST['nama'];
-$email = $_POST['email'];
-$comment = $_POST['comment'];
-$sql = "INSERT INTO komen VALUES ('$nama', '$email', '$comment')";
-if ($conn->query($sql) === TRUE)
-{
-?>
-<div class="alert alert-success alertdismissable">
-<strong>Success!</strong> Data Tamu Restaurant Berhasil dinput
-</div>
-<?php
-}
-else
-{
-?>
-<div class="alert alert-danger alertdismissable">
-<strong>Failed!</strong> Data Tamu Restaurant Gagal diInput
-</div>
-<?php
-}
-}
-?>
