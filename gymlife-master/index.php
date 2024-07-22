@@ -164,7 +164,7 @@ if (isset($_SESSION['username'])) {
                             <div class="hi-text">
                                 <span>Shape your body</span>
                                 <h1>Be <strong>strong</strong> traning hard</h1>
-                                <a href="#" class="primary-btn">Get info</a>
+                                <a href="./about-us.php" class="primary-btn">Get info</a>
                             </div>
                         </div>
                     </div>
@@ -177,7 +177,7 @@ if (isset($_SESSION['username'])) {
                             <div class="hi-text">
                                 <span>Shape your body</span>
                                 <h1>Be <strong>strong</strong> traning hard</h1>
-                                <a href="#" class="primary-btn">Get info</a>
+                                <a href="./about-us.php" class="primary-btn">Get info</a>
                             </div>
                         </div>
                     </div>
