@@ -10,7 +10,6 @@ if (isset($_SESSION['username'])) {
         window.onload = function () {
             document.getElementById('btnProfile').removeAttribute('hidden');
             document.getElementById('textBase').removeAttribute('hidden');
-            document.getElementById('listOption').removeAttribute('hidden');
             document.getElementById('signIn').setAttribute('hidden', true);
         };
     </script>
@@ -22,6 +21,15 @@ if (isset($_SESSION['username'])) {
     }
     $namaRow = mysqli_fetch_assoc($queryNama);
     $nama = $namaRow['nama'];
+
+    $sqlSaldo = "SELECT saldo FROM user WHERE username = '$usernames'";
+    $querySaldo = mysqli_query($conn, $sqlSaldo);
+    if (!$querySaldo) {
+        die("Query saldo gagal: " . mysqli_error($conn));
+    }
+
+    $saldoRow = mysqli_fetch_assoc($querySaldo);
+    $saldo = $saldoRow['saldo'];
 }
 ?>
 <!DOCTYPE html>

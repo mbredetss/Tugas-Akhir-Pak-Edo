@@ -10,7 +10,6 @@ if (isset($_SESSION['username'])) {
         window.onload = function () {
             document.getElementById('btnProfile').removeAttribute('hidden');
             document.getElementById('textBase').removeAttribute('hidden');
-            document.getElementById('listOption').removeAttribute('hidden');
             document.getElementById('signIn').setAttribute('hidden', true);
         };
     </script>
@@ -22,6 +21,44 @@ if (isset($_SESSION['username'])) {
     }
     $namaRow = mysqli_fetch_assoc($queryNama);
     $nama = $namaRow['nama'];
+
+    $sqlSaldo = "SELECT saldo FROM user WHERE username = '$usernames'";
+    $querySaldo = mysqli_query($conn, $sqlSaldo);
+    if (!$querySaldo) {
+        die("Query saldo gagal: " . mysqli_error($conn));
+    }
+
+    $saldoRow = mysqli_fetch_assoc($querySaldo);
+    $saldo = $saldoRow['saldo'];
+}
+
+//BUTTON LOGIN
+if (isset($_POST["btnLogin"])) {
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+    if ($username == NULL || $password == NULL) {
+        ?>
+        <script>
+            document.getElementById('loginAlert').innerText = "Username dan password harus diisi!";
+            document.getElementById('loginAlert').removeAttribute('hidden');
+        </script>
+        <?php
+    } else {
+        $sqlLogin = "SELECT * FROM user WHERE username='$username' AND password='$password'";
+        $result = mysqli_query($conn, $sqlLogin);
+        if (mysqli_num_rows($result) > 0) {
+            // Login berhasil, simpan username dan password di session
+            $_SESSION['username'] = $username;
+            $_SESSION['password'] = $password;
+            header("Location: index.php");
+        } else {
+            ?>
+            <script>
+                document.getElementById('loginAlert').removeAttribute('hidden');
+            </script>
+            <?php
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -107,14 +144,120 @@ if (isset($_SESSION['username'])) {
                             <li><a href="./team.php">Our Team</a></li>
                             <li class="active"><a href="./blog.php">Article</a>
                                 <ul class="dropdown">
-                                    <li><a href="./blog.php">Back to Article</a></li>
-                                </ul></li>
-                            <li><a href="./contact.php">Contact</a></li>
+                                    <li><a href="./blog.html">Back to Article</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./contact.html">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3">
-                    
+                    <div class="top-option">
+                        <div class="relative">
+                            <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
+                                type="button">
+                                <a id="signIn" class="sign-in-btn">Sign In</a>
+                            </button>
+
+                            <!-- Main modal -->
+                            <div id="authentication-modal" tabindex="-1" aria-hidden="true"
+                                class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                <div class="relative p-4 w-full max-w-md max-h-full">
+                                    <!-- Modal content -->
+                                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                        <!-- Modal header -->
+                                        <div
+                                            class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                                Masuk ke akun Anda!
+                                            </h3>
+                                            <button type="button"
+                                                class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                data-modal-hide="authentication-modal">
+                                                <svg class="w-3 h-3" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2"
+                                                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                </svg>
+                                                <span class="sr-only">Close modal</span>
+                                            </button>
+                                        </div>
+                                        <!-- Modal body -->
+                                        <div class="p-4 md:p-5">
+                                            <form method="post" class="space-y-4">
+                                                <div>
+                                                    <label for="username"
+                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                        Username
+                                                    </label>
+                                                    <input type="text" name="username" id="username"
+                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                                        required />
+                                                </div>
+                                                <div>
+                                                    <label for="password"
+                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                        Password</label>
+                                                    <input type="password" name="password" id="password"
+                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                                        required />
+                                                </div>
+                                                <div class="col-span-6">
+                                                    <div id="loginAlert" hidden class="alert alert-danger" role="alert">
+                                                        Username atau password salah!
+                                                    </div>
+                                                </div>
+                                                <button type="submit" name="btnLogin"
+                                                    class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login
+                                                    to your account</button>
+                                                <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
+                                                    Not registered? <a href="registrasi.php"
+                                                        class="text-blue-700 hover:underline dark:text-blue-500">Create
+                                                        account</a>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Profile -->
+                            <a hidden id="btnProfile" class="user-profile fa fa-user"></a>
+                            <span id="textBase" hidden class="text-base font-medium text-orange-500">
+                                <?php echo $nama; ?>
+                            </span>
+                            <div hidden id="listOption"
+                                class="absolute end-0 z-10 mt-2 w-56 divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg"
+                                role="menu">
+                                <div class="p-2">
+                                    <a href="#"
+                                        class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm  hover:bg-orange-500"
+                                        role="menuitem">
+                                        Edit profile
+                                    </a>
+                                </div>
+
+                                <div class="p-2">
+                                    <p class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm "
+                                        role="menuitem">
+                                        Saldo : <?php echo $saldo; ?>
+                                    </p>
+                                </div>
+
+                                <div class="p-2">
+                                    <form method="POST" action="logout.php">
+                                        <button type="submit"
+                                            class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
+                                            role="menuitem">
+                                            Logout
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- Profile -->
+                        </div>
+
+                    </div>
                 </div>
             </div>
             <div class="canvas-open">
@@ -150,15 +293,23 @@ if (isset($_SESSION['username'])) {
                 <div class="col-lg-8 p-0 m-auto">
                     <div class="blog-details-text">
                         <div class="blog-details-title">
-                            <p>Nutrition plays an important role in your exercise performance, muscle recovery, and achieving fitness goals. 
-                                What you eat before, during, and after exercise can significantly impact your workout results. 
-                                This article will provide a practical guide to sports nutrition, explaining what you need to consume in each 
+                            <p>Nutrition plays an important role in your exercise performance, muscle recovery, and
+                                achieving fitness goals.
+                                What you eat before, during, and after exercise can significantly impact your workout
+                                results.
+                                This article will provide a practical guide to sports nutrition, explaining what you
+                                need to consume in each
                                 phase of training to maximize results and maintain a healthy body.</p>
-                            <p>Food intake before exercise is very important to provide the energy the body needs during exercise. 
-                                Ideally, consume foods rich in complex carbohydrates and a little protein 1-2 hours before exercise. 
-                                For example, you can choose brown rice with grilled chicken or whole wheat toast with eggs.</p>
-                            <p>Selama berolahraga, terutama untuk sesi latihan intensitas tinggi atau durasi panjang, penting untuk menjaga asupan cairan dan energi. 
-                                Minumlah air secara teratur untuk menghindari dehidrasi. Anda juga dapat mengonsumsi minuman olahraga yang mengandung elektrolit 
+                            <p>Food intake before exercise is very important to provide the energy the body needs during
+                                exercise.
+                                Ideally, consume foods rich in complex carbohydrates and a little protein 1-2 hours
+                                before exercise.
+                                For example, you can choose brown rice with grilled chicken or whole wheat toast with
+                                eggs.</p>
+                            <p>Selama berolahraga, terutama untuk sesi latihan intensitas tinggi atau durasi panjang,
+                                penting untuk menjaga asupan cairan dan energi.
+                                Minumlah air secara teratur untuk menghindari dehidrasi. Anda juga dapat mengonsumsi
+                                minuman olahraga yang mengandung elektrolit
                                 dan karbohidrat sederhana untuk membantu mempertahankan energi.
                             </p>
                         </div>
@@ -242,13 +393,20 @@ if (isset($_SESSION['username'])) {
                                 </div>
                             </div>
                             <?php
-                            if (isset($_POST['submit']))
-                            {
-                            $nama = $_POST['nama'];
-                            $email = $_POST['email'];
-                            $comment = $_POST['comment'];
-                            $sql = "INSERT INTO komen VALUES ('','$nama', '$email', '$comment')";
-                            $conn->query($sql) === TRUE;
+                            if (isset($_POST['submit'])) {
+                                if (isset($_SESSION['username'])) {
+                                    $nama = $_POST['nama'];
+                                    $email = $_POST['email'];
+                                    $comment = $_POST['comment'];
+                                    $sql = "INSERT INTO komen VALUES ('','$nama', '$email', '$comment')";
+                                    $conn->query($sql) === TRUE;
+                                } else {
+                                    ?>
+                                    <script>
+                                        alert("Silahkan login terlebih dahulu");
+                                    </script>
+                                    <?php
+                                }
                             }
                             ?>
 
@@ -256,38 +414,34 @@ if (isset($_SESSION['username'])) {
                                 <div class="comment-option">
                                     <h5 class="co-title">Comment</h5>
                                     <?php
-                                $sql_select = "SELECT nama, comment FROM komen ORDER BY id LIMIT 4";
-                                $result_select = $conn->query($sql_select);
-                                if ($result_select->num_rows === 0)
-                                {
-                                ?>
-                                <?php
-                                }
-                                else
-                                {
-                                while ($komen = $result_select->fetch_assoc())
-                                {
-                                ?>
-                                    <div class="co-item">
-                                        <div class="co-widget">
-                                            <a href="#"><i class="fa fa-heart-o"></i></a>
-                                            <a href="#"><i class="fa fa-share-square-o"></i></a>
-                                        </div>
-                                        <div class="co-pic">
-                                            <img src="img/blog/details/comment-1.jpg" alt="">
-                                            <h5><?=$komen['nama']?></h5>
-                                        </div>
-                                        <div class="co-text">
-                                            <p><?=$komen['comment']?></p>
-                                        </div>                             
-                                    </div>
-                                    <?php
-                            }
-                            }
-                            ?>          
+                                    $sql_select = "SELECT nama, comment FROM komen ORDER BY id";
+                                    $result_select = $conn->query($sql_select);
+                                    if ($result_select->num_rows === 0) {
+                                        ?>
+                                        <?php
+                                    } else {
+                                        while ($komen = $result_select->fetch_assoc()) {
+                                            ?>
+                                            <div class="co-item">
+                                                <div class="co-widget">
+                                                    <a href="#"><i class="fa fa-heart-o"></i></a>
+                                                    <a href="#"><i class="fa fa-share-square-o"></i></a>
+                                                </div>
+                                                <div class="co-pic">
+                                                    <img src="img/blog/details/comment-1.jpg" alt="">
+                                                    <h5><?= $komen['nama'] ?></h5>
+                                                </div>
+                                                <div class="co-text">
+                                                    <p><?= $komen['comment'] ?></p>
+                                                </div>
+                                            </div>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -303,8 +457,7 @@ if (isset($_SESSION['username'])) {
                 <div class="col-lg-4">
                     <div class="gt-text">
                         <i class="fa fa-map-marker"></i>
-                        <p>Jl. Abdullah Daeng Sirua No.84, Masale, Kec. Panakkukang, Kota Makassar, Sulawesi
-                        Selatan,<br/> 90231</p>
+                        <p>333 Middle Winchendon Rd, Rindge,<br /> NH 03461</p>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -395,8 +548,12 @@ if (isset($_SESSION['username'])) {
                 <div class="col-lg-12 text-center">
                     <div class="copyright-text">
                         <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This
+                            template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a
+                                href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
                     </div>
                 </div>
             </div>
@@ -413,8 +570,11 @@ if (isset($_SESSION['username'])) {
     <script src="js/jquery.slicknav.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
-
+    <script src="js/script.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
 
 
 </body>
+
 </html>

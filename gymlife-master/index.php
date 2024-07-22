@@ -10,7 +10,6 @@ if (isset($_SESSION['username'])) {
         window.onload = function () {
             document.getElementById('btnProfile').removeAttribute('hidden');
             document.getElementById('textBase').removeAttribute('hidden');
-            document.getElementById('listOption').removeAttribute('hidden');
             document.getElementById('signIn').setAttribute('hidden', true);
         };
     </script>
@@ -22,6 +21,67 @@ if (isset($_SESSION['username'])) {
     }
     $namaRow = mysqli_fetch_assoc($queryNama);
     $nama = $namaRow['nama'];
+
+    $sqlSaldo = "SELECT saldo FROM user WHERE username = '$usernames'";
+    $querySaldo = mysqli_query($conn, $sqlSaldo);
+    if (!$querySaldo) {
+        die("Query saldo gagal: " . mysqli_error($conn));
+    }
+
+    $saldoRow = mysqli_fetch_assoc($querySaldo);
+    $saldo = $saldoRow['saldo'];
+}
+
+//BUTTON LOGIN
+if (isset($_POST["btnLogin"])) {
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+    if ($username == NULL || $password == NULL) {
+        ?>
+        <script>
+            document.getElementById('loginAlert').innerText = "Username dan password harus diisi!";
+            document.getElementById('loginAlert').removeAttribute('hidden');
+        </script>
+        <?php
+    } else {
+        $sqlLogin = "SELECT * FROM user WHERE username='$username' AND password='$password'";
+        $result = mysqli_query($conn, $sqlLogin);
+        if (mysqli_num_rows($result) > 0) {
+            // Login berhasil, simpan username dan password di session
+            $_SESSION['username'] = $username;
+            $_SESSION['password'] = $password;
+            header("Location: index.php");
+        } else {
+            ?>
+            <script>
+                document.getElementById('loginAlert').removeAttribute('hidden');
+            </script>
+            <?php
+        }
+    }
+}
+
+//LANGGANAN 3MONTH
+if (!isset($_SESSION['username'])) {
+    ?>
+    <script>
+        window.onload = function () {
+            const btnLangganan = document.querySelectorAll('.btnLangganan');
+            btnLangganan.forEach(function (button) {
+                button.setAttribute('data-modal-target', 'authentication-modal');
+                button.setAttribute('data-modal-toggle', 'authentication-modal');
+            });
+            document.querySelectorAll('.btnLangganan').forEach(button => {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault(); // Mencegah aksi default yang mungkin menyebabkan reload
+                    // Lakukan aksi lain
+                });
+            });
+        }
+    </script>
+    <?php
+} else if (isset($_POST['btn3Month'])) {
+
 }
 ?>
 <!DOCTYPE html>
@@ -113,8 +173,73 @@ if (isset($_SESSION['username'])) {
                 <div class="col-lg-3">
                     <div class="top-option">
                         <div class="relative">
-                            <a id="signIn" href="login.php" class="sign-in-btn">Sign In</a>
+                            <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
+                                type="button">
+                                <a id="signIn" class="sign-in-btn">Sign In</a>
+                            </button>
 
+                            <!-- Main modal -->
+                            <div id="authentication-modal" tabindex="-1" aria-hidden="true"
+                                class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                <div class="relative p-4 w-full max-w-md max-h-full">
+                                    <!-- Modal content -->
+                                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                        <!-- Modal header -->
+                                        <div
+                                            class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                                Masuk ke akun Anda!
+                                            </h3>
+                                            <button type="button"
+                                                class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                data-modal-hide="authentication-modal">
+                                                <svg class="w-3 h-3" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2"
+                                                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                </svg>
+                                                <span class="sr-only">Close modal</span>
+                                            </button>
+                                        </div>
+                                        <!-- Modal body -->
+                                        <div class="p-4 md:p-5">
+                                            <form method="post" class="space-y-4">
+                                                <div>
+                                                    <label for="username"
+                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                        Username
+                                                    </label>
+                                                    <input type="text" name="username" id="username"
+                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                                        required />
+                                                </div>
+                                                <div>
+                                                    <label for="password"
+                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                        Password</label>
+                                                    <input type="password" name="password" id="password"
+                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                                        required />
+                                                </div>
+                                                <div class="col-span-6">
+                                                    <div id="loginAlert" hidden class="alert alert-danger" role="alert">
+                                                        Username atau password salah!
+                                                    </div>
+                                                </div>
+                                                <button type="submit" name="btnLogin"
+                                                    class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login
+                                                    to your account</button>
+                                                <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
+                                                    Not registered? <a href="registrasi.php"
+                                                        class="text-blue-700 hover:underline dark:text-blue-500">Create
+                                                        account</a>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- Profile -->
                             <a hidden id="btnProfile" class="user-profile fa fa-user"></a>
                             <span id="textBase" hidden class="text-base font-medium text-orange-500">
@@ -129,6 +254,13 @@ if (isset($_SESSION['username'])) {
                                         role="menuitem">
                                         Edit profile
                                     </a>
+                                </div>
+
+                                <div class="p-2">
+                                    <p class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm "
+                                        role="menuitem">
+                                        Saldo : <?php echo $saldo; ?>
+                                    </p>
                                 </div>
 
                                 <div class="p-2">
@@ -339,64 +471,72 @@ if (isset($_SESSION['username'])) {
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-8">
-                    <div class="ps-item">
-                        <h3>3 Month unlimited</h3>
-                        <div class="pi-price">
-                            <h2>Rp. 350.000</h2>
-                            <span>SINGLE CLASS</span>
+            <form id="myForm" method="post">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-8">
+                        <div class="ps-item">
+                            <h3>3 Month unlimited</h3>
+                            <div class="pi-price">
+                                <h2>Rp. 350.000</h2>
+                                <span>SINGLE CLASS</span>
+                            </div>
+                            <ul>
+                                <li>Free riding</li>
+                                <li>Limited equipments</li>
+                                <li>Group trainer</li>
+                                <li>Weight loss classes</li>
+                                <li>Monthly membership</li>
+                                <li>Time restrictions apply</li>
+                            </ul>
+                            <button class="btnLangganan" name="btn3Month">
+                                <a href="" class="primary-btn pricing-btn">Enroll now</a>
+                            </button>
                         </div>
-                        <ul>
-                            <li>Free riding</li>
-                            <li>Limited equipments</li>
-                            <li>Group trainer</li>
-                            <li>Weight loss classes</li>
-                            <li>Monthly membership</li>
-                            <li>Time restrictions apply</li>
-                        </ul>
-                        <a href="#" class="primary-btn pricing-btn">Enroll now</a>
+                    </div>
+                    <div class="col-lg-4 col-md-8">
+                        <div class="ps-item">
+                            <h3>6 Month unlimited</h3>
+                            <div class="pi-price">
+                                <h2>Rp. 600.000</h2>
+                                <span>DOUBLE CLASS</span>
+                            </div>
+                            <ul>
+                                <li>Free riding</li>
+                                <li>Unlimited equipments</li>
+                                <li>Personal trainer</li>
+                                <li>Weight loss classes</li>
+                                <li>Monthly membership</li>
+                                <li>No time restrictions</li>
+                            </ul>
+                            <button class="btnLangganan" name="btn6Month">
+                                <a class="primary-btn pricing-btn">Enroll now</a>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-8">
+                        <div class="ps-item">
+                            <h3>1 Year unlimited</h3>
+                            <div class="pi-price">
+                                <h2>Rp. 1.150.000</h2>
+                                <span>SPECIAL CLASS</span>
+                            </div>
+                            <ul>
+                                <li>Free riding</li>
+                                <li>Unlimited premium equipments</li>
+                                <li>Personal elite trainer</li>
+                                <li>Weight loss & muscle gain classes</li>
+                                <li>Yearly membership</li>
+                                <li>No time restrictions</li>
+                                <li>Access to exclusive events</li>
+                                <li>Free nutritional guidance</li>
+                            </ul>
+                            <button class="btnLangganan" name="btn1Year">
+                                <a href="" class="primary-btn pricing-btn">Enroll now</a>
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-8">
-                    <div class="ps-item">
-                        <h3>6 Month unlimited</h3>
-                        <div class="pi-price">
-                            <h2>Rp. 600.000</h2>
-                            <span>DOUBLE CLASS</span>
-                        </div>
-                        <ul>
-                            <li>Free riding</li>
-                            <li>Unlimited equipments</li>
-                            <li>Personal trainer</li>
-                            <li>Weight loss classes</li>
-                            <li>Monthly membership</li>
-                            <li>No time restrictions</li>
-                        </ul>
-                        <a href="#" class="primary-btn pricing-btn">Enroll now</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-8">
-                    <div class="ps-item">
-                        <h3>1 Year unlimited</h3>
-                        <div class="pi-price">
-                            <h2>Rp. 1.150.000</h2>
-                            <span>SPECIAL CLASS</span>
-                        </div>
-                        <ul>
-                            <li>Free riding</li>
-                            <li>Unlimited premium equipments</li>
-                            <li>Personal elite trainer</li>
-                            <li>Weight loss & muscle gain classes</li>
-                            <li>Yearly membership</li>
-                            <li>No time restrictions</li>
-                            <li>Access to exclusive events</li>
-                            <li>Free nutritional guidance</li>
-                        </ul>
-                        <a href="#" class="primary-btn pricing-btn">Enroll now</a>
-                    </div>
-                </div>
-            </div>
+            </form>
         </div>
     </section>
     <!-- Pricing Section End -->
