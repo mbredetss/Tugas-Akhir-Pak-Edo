@@ -842,9 +842,10 @@ if (isset($_POST['btn1Year'])) {
                         <div class="fa-social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa  fa-envelope-o"></i></a>
+                            <a href="https://youtu.be/FOJHzV5ERgQ?si=9oxEa6r1_nlYvDbs"><i
+                                    class="fa fa-youtube-play"></i></a>
+                            <a href="https://www.instagram.com/celebes_gym/"><i class="fa fa-instagram"></i></a>
+                            <a href="mailto:celebesgym@gmail.com"><i class="fa  fa-envelope-o"></i></a>
                         </div>
                     </div>
                 </div>
@@ -852,10 +853,10 @@ if (isset($_POST['btn1Year'])) {
                     <div class="fs-widget">
                         <h4>Useful links</h4>
                         <ul>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Classes</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="./about-us.php">About</a></li>
+                            <li><a href="./blog.php">Article</a></li>
+                            <li><a href="./class-details.php">Classes</a></li>
+                            <li><a href="./contact.php">Contact</a></li>
                         </ul>
                     </div>
                 </div>
@@ -864,9 +865,9 @@ if (isset($_POST['btn1Year'])) {
                         <h4>Support</h4>
                         <ul>
                             <li><a href="#">Login</a></li>
+                            <li><a href="./logout.php">Logout</a></li>
                             <li><a href="#">My account</a></li>
-                            <li><a href="#">Subscribe</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="https://youtu.be/FOJHzV5ERgQ?si=9oxEa6r1_nlYvDbs">Subscribe</a></li>
                         </ul>
                     </div>
                 </div>
@@ -874,14 +875,14 @@ if (isset($_POST['btn1Year'])) {
                     <div class="fs-widget">
                         <h4>Tips & Guides</h4>
                         <div class="fw-recent">
-                            <h6><a href="#">Physical fitness may help prevent depression, anxiety</a></h6>
+                            <h6><a href="./blog.php">Physical fitness may help prevent depression, anxiety</a></h6>
                             <ul>
                                 <li>3 min read</li>
                                 <li>20 Comment</li>
                             </ul>
                         </div>
                         <div class="fw-recent">
-                            <h6><a href="#">Fitness: The best exercise to lose belly fat and tone up...</a></h6>
+                            <h6><a href="./blog.php">Fitness: The best exercise to lose belly fat and tone up...</a></h6>
                             <ul>
                                 <li>3 min read</li>
                                 <li>20 Comment</li>

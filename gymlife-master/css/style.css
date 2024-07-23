@@ -168,7 +168,7 @@ ol {
 	display: inline-block;
 	font-size: 14px;
 	padding: 17px 30px 16px;
-	color: #ffffff;
+	color: #ffffff !important;
 	background: #f36100;
 	line-height: normal;
 	letter-spacing: 1px;
@@ -942,6 +942,7 @@ ol {
 .pricing-section .ps-item .primary-btn {
     margin-top: auto;
 }
+
 /*---------------------
   Gallery Section
 -----------------------*/
