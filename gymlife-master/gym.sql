@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 22 Jul 2024 pada 18.55
+-- Waktu pembuatan: 23 Jul 2024 pada 05.03
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.0.30
 
@@ -56,6 +56,7 @@ CREATE TABLE `komen` (
 
 CREATE TABLE `langganan` (
   `username` int(11) NOT NULL,
+  `kelas` varchar(100) NOT NULL,
   `tanggal_langganan` date NOT NULL,
   `langganan_berakhir` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -64,8 +65,8 @@ CREATE TABLE `langganan` (
 -- Dumping data untuk tabel `langganan`
 --
 
-INSERT INTO `langganan` (`username`, `tanggal_langganan`, `langganan_berakhir`) VALUES
-(123, '2024-08-21', '2024-07-22');
+INSERT INTO `langganan` (`username`, `kelas`, `tanggal_langganan`, `langganan_berakhir`) VALUES
+(123, 'SINGLE CLASS', '2024-07-23', '2024-10-21');
 
 -- --------------------------------------------------------
 
@@ -110,7 +111,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`no`, `nama`, `alamat`, `tanggal_lahir`, `saldo`, `username`, `password`) VALUES
-(19, '123', 'dasdsa', '2024-07-21', 450000, '123', '123'),
+(19, '123', 'dasdsa', '2024-07-21', 73950000, '123', '123'),
 (20, 'fsdf', 'sdfsdf', '2024-07-21', 0, '1234', '123'),
 (22, 'asdasd', 'asdasdasd', '2024-07-21', 0, 'asdasd', '123');
 
