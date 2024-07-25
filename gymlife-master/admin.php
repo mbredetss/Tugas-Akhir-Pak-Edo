@@ -11,20 +11,27 @@ if (isset($_POST['btnSaldo'])) {
   if (!$CekUsernameAvailable) {
     die("Query Cek Username gagal: " . mysqli_error($conn));
   }
+  $found = false;
   while ($cek = $CekUsernameAvailable->fetch_assoc()) {
     if ($cek['username'] == $username) {
-      $sqlAddSaldo = "UPDATE user SET saldo = $jumlahSaldo WHERE username = $username";
+      $sqlAddSaldo = "UPDATE user SET saldo = saldo + $jumlahSaldo WHERE username = '$username'";
       $queryAddSaldo = mysqli_query($conn, $sqlAddSaldo);
       if (!$queryAddSaldo) {
         die("Query add saldo Gagal: " . mysqli_error($conn));
       }
-    } else {
-      ?>
-      <script>
-        document.getElementById('alert3').removeAttribute('hidden');
-      </script>
-      <?php
+      $found = true;
+      break; // Stop the loop once the username is found and saldo is updated
     }
+  }
+
+  if (!$found) {
+    ?>
+    <script>
+      window.onload = function () {
+      document.getElementById('alert3').removeAttribute('hidden');
+      }
+    </script>
+    <?php
   }
 }
 ?>
